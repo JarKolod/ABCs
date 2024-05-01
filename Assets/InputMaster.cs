@@ -28,19 +28,10 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
             ""id"": ""edfd5f1e-6372-44bf-820e-fcf88cbca613"",
             ""actions"": [
                 {
-                    ""name"": ""Forward"",
-                    ""type"": ""Value"",
+                    ""name"": ""Direction"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""50d03900-39eb-4f56-9338-93010810b585"",
-                    ""expectedControlType"": ""Axis"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                },
-                {
-                    ""name"": ""Right"",
-                    ""type"": ""Value"",
-                    ""id"": ""22848b95-37f5-4e50-b888-7f2f13620bab"",
-                    ""expectedControlType"": ""Axis"",
+                    ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
@@ -52,7 +43,7 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": false
+                    ""initialStateCheck"": true
                 },
                 {
                     ""name"": ""Run"",
@@ -75,68 +66,57 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
             ],
             ""bindings"": [
                 {
-                    ""name"": ""1D Axis"",
+                    ""name"": ""2D Vector"",
                     ""id"": ""54648c8f-af80-436b-989b-a5263d5c385c"",
-                    ""path"": ""1DAxis"",
+                    ""path"": ""2DVector"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Forward"",
+                    ""action"": ""Direction"",
                     ""isComposite"": true,
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": ""positive"",
+                    ""name"": ""Up"",
                     ""id"": ""0a67fa19-cc40-4b3d-97d5-ce662046dd4a"",
                     ""path"": ""<Keyboard>/w"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Forward"",
+                    ""action"": ""Direction"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": ""negative"",
+                    ""name"": ""Down"",
                     ""id"": ""d04a684f-0fdf-4285-b69c-1022c56165ff"",
                     ""path"": ""<Keyboard>/s"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Forward"",
+                    ""action"": ""Direction"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": ""1D Axis"",
-                    ""id"": ""c9b1b560-b421-448e-a1a8-26f99ed3db29"",
-                    ""path"": ""1DAxis"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Right"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""positive"",
-                    ""id"": ""14b6ce52-ca9a-44d4-8123-d6bcc441594a"",
-                    ""path"": ""<Keyboard>/d"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Right"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""negative"",
-                    ""id"": ""c0da8760-fab1-46fd-b101-a37fcfbf0c65"",
+                    ""name"": ""Left"",
+                    ""id"": ""c176dc07-192b-48ad-bdce-d6f43b5ca122"",
                     ""path"": ""<Keyboard>/a"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Right"",
+                    ""action"": ""Direction"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Right"",
+                    ""id"": ""1be6ce90-e65e-4ffb-a85b-daa7128c84fa"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Direction"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -180,19 +160,10 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
             ""id"": ""6e859690-f4ea-4354-a11a-7ff1700f8b64"",
             ""actions"": [
                 {
-                    ""name"": ""MouseX"",
-                    ""type"": ""Value"",
+                    ""name"": ""Look"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""d569aa61-0bef-4448-afe2-890a092225b2"",
-                    ""expectedControlType"": ""Axis"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                },
-                {
-                    ""name"": ""MouseY"",
-                    ""type"": ""Value"",
-                    ""id"": ""f4ee6621-20bc-42ae-81bb-e3918cdade93"",
-                    ""expectedControlType"": ""Axis"",
+                    ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
@@ -202,22 +173,11 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""5262a82a-36ae-4e95-b753-a490b7ff514d"",
-                    ""path"": ""<Mouse>/delta/x"",
+                    ""path"": ""<Mouse>/delta"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""MouseX"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""1955812f-37d9-4288-888a-7bdfa5df8c7f"",
-                    ""path"": ""<Mouse>/delta/y"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""MouseY"",
+                    ""action"": ""Look"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -228,15 +188,13 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
 }");
         // Movement
         m_Movement = asset.FindActionMap("Movement", throwIfNotFound: true);
-        m_Movement_Forward = m_Movement.FindAction("Forward", throwIfNotFound: true);
-        m_Movement_Right = m_Movement.FindAction("Right", throwIfNotFound: true);
+        m_Movement_Direction = m_Movement.FindAction("Direction", throwIfNotFound: true);
         m_Movement_Jump = m_Movement.FindAction("Jump", throwIfNotFound: true);
         m_Movement_Run = m_Movement.FindAction("Run", throwIfNotFound: true);
         m_Movement_Crouch = m_Movement.FindAction("Crouch", throwIfNotFound: true);
         // CameraLook
         m_CameraLook = asset.FindActionMap("CameraLook", throwIfNotFound: true);
-        m_CameraLook_MouseX = m_CameraLook.FindAction("MouseX", throwIfNotFound: true);
-        m_CameraLook_MouseY = m_CameraLook.FindAction("MouseY", throwIfNotFound: true);
+        m_CameraLook_Look = m_CameraLook.FindAction("Look", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -298,8 +256,7 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
     // Movement
     private readonly InputActionMap m_Movement;
     private List<IMovementActions> m_MovementActionsCallbackInterfaces = new List<IMovementActions>();
-    private readonly InputAction m_Movement_Forward;
-    private readonly InputAction m_Movement_Right;
+    private readonly InputAction m_Movement_Direction;
     private readonly InputAction m_Movement_Jump;
     private readonly InputAction m_Movement_Run;
     private readonly InputAction m_Movement_Crouch;
@@ -307,8 +264,7 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
     {
         private @InputMaster m_Wrapper;
         public MovementActions(@InputMaster wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Forward => m_Wrapper.m_Movement_Forward;
-        public InputAction @Right => m_Wrapper.m_Movement_Right;
+        public InputAction @Direction => m_Wrapper.m_Movement_Direction;
         public InputAction @Jump => m_Wrapper.m_Movement_Jump;
         public InputAction @Run => m_Wrapper.m_Movement_Run;
         public InputAction @Crouch => m_Wrapper.m_Movement_Crouch;
@@ -321,12 +277,9 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_MovementActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_MovementActionsCallbackInterfaces.Add(instance);
-            @Forward.started += instance.OnForward;
-            @Forward.performed += instance.OnForward;
-            @Forward.canceled += instance.OnForward;
-            @Right.started += instance.OnRight;
-            @Right.performed += instance.OnRight;
-            @Right.canceled += instance.OnRight;
+            @Direction.started += instance.OnDirection;
+            @Direction.performed += instance.OnDirection;
+            @Direction.canceled += instance.OnDirection;
             @Jump.started += instance.OnJump;
             @Jump.performed += instance.OnJump;
             @Jump.canceled += instance.OnJump;
@@ -340,12 +293,9 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
 
         private void UnregisterCallbacks(IMovementActions instance)
         {
-            @Forward.started -= instance.OnForward;
-            @Forward.performed -= instance.OnForward;
-            @Forward.canceled -= instance.OnForward;
-            @Right.started -= instance.OnRight;
-            @Right.performed -= instance.OnRight;
-            @Right.canceled -= instance.OnRight;
+            @Direction.started -= instance.OnDirection;
+            @Direction.performed -= instance.OnDirection;
+            @Direction.canceled -= instance.OnDirection;
             @Jump.started -= instance.OnJump;
             @Jump.performed -= instance.OnJump;
             @Jump.canceled -= instance.OnJump;
@@ -376,14 +326,12 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
     // CameraLook
     private readonly InputActionMap m_CameraLook;
     private List<ICameraLookActions> m_CameraLookActionsCallbackInterfaces = new List<ICameraLookActions>();
-    private readonly InputAction m_CameraLook_MouseX;
-    private readonly InputAction m_CameraLook_MouseY;
+    private readonly InputAction m_CameraLook_Look;
     public struct CameraLookActions
     {
         private @InputMaster m_Wrapper;
         public CameraLookActions(@InputMaster wrapper) { m_Wrapper = wrapper; }
-        public InputAction @MouseX => m_Wrapper.m_CameraLook_MouseX;
-        public InputAction @MouseY => m_Wrapper.m_CameraLook_MouseY;
+        public InputAction @Look => m_Wrapper.m_CameraLook_Look;
         public InputActionMap Get() { return m_Wrapper.m_CameraLook; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -393,22 +341,16 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_CameraLookActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_CameraLookActionsCallbackInterfaces.Add(instance);
-            @MouseX.started += instance.OnMouseX;
-            @MouseX.performed += instance.OnMouseX;
-            @MouseX.canceled += instance.OnMouseX;
-            @MouseY.started += instance.OnMouseY;
-            @MouseY.performed += instance.OnMouseY;
-            @MouseY.canceled += instance.OnMouseY;
+            @Look.started += instance.OnLook;
+            @Look.performed += instance.OnLook;
+            @Look.canceled += instance.OnLook;
         }
 
         private void UnregisterCallbacks(ICameraLookActions instance)
         {
-            @MouseX.started -= instance.OnMouseX;
-            @MouseX.performed -= instance.OnMouseX;
-            @MouseX.canceled -= instance.OnMouseX;
-            @MouseY.started -= instance.OnMouseY;
-            @MouseY.performed -= instance.OnMouseY;
-            @MouseY.canceled -= instance.OnMouseY;
+            @Look.started -= instance.OnLook;
+            @Look.performed -= instance.OnLook;
+            @Look.canceled -= instance.OnLook;
         }
 
         public void RemoveCallbacks(ICameraLookActions instance)
@@ -428,15 +370,13 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
     public CameraLookActions @CameraLook => new CameraLookActions(this);
     public interface IMovementActions
     {
-        void OnForward(InputAction.CallbackContext context);
-        void OnRight(InputAction.CallbackContext context);
+        void OnDirection(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnRun(InputAction.CallbackContext context);
         void OnCrouch(InputAction.CallbackContext context);
     }
     public interface ICameraLookActions
     {
-        void OnMouseX(InputAction.CallbackContext context);
-        void OnMouseY(InputAction.CallbackContext context);
+        void OnLook(InputAction.CallbackContext context);
     }
 }

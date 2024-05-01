@@ -6,19 +6,10 @@
             "id": "edfd5f1e-6372-44bf-820e-fcf88cbca613",
             "actions": [
                 {
-                    "name": "Forward",
-                    "type": "Value",
+                    "name": "Direction",
+                    "type": "PassThrough",
                     "id": "50d03900-39eb-4f56-9338-93010810b585",
-                    "expectedControlType": "Axis",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
-                    "name": "Right",
-                    "type": "Value",
-                    "id": "22848b95-37f5-4e50-b888-7f2f13620bab",
-                    "expectedControlType": "Axis",
+                    "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -30,7 +21,7 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 },
                 {
                     "name": "Run",
@@ -53,68 +44,57 @@
             ],
             "bindings": [
                 {
-                    "name": "1D Axis",
+                    "name": "2D Vector",
                     "id": "54648c8f-af80-436b-989b-a5263d5c385c",
-                    "path": "1DAxis",
+                    "path": "2DVector",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Forward",
+                    "action": "Direction",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "positive",
+                    "name": "Up",
                     "id": "0a67fa19-cc40-4b3d-97d5-ce662046dd4a",
                     "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Forward",
+                    "action": "Direction",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "negative",
+                    "name": "Down",
                     "id": "d04a684f-0fdf-4285-b69c-1022c56165ff",
                     "path": "<Keyboard>/s",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Forward",
+                    "action": "Direction",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "1D Axis",
-                    "id": "c9b1b560-b421-448e-a1a8-26f99ed3db29",
-                    "path": "1DAxis",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Right",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "positive",
-                    "id": "14b6ce52-ca9a-44d4-8123-d6bcc441594a",
-                    "path": "<Keyboard>/d",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Right",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "negative",
-                    "id": "c0da8760-fab1-46fd-b101-a37fcfbf0c65",
+                    "name": "Left",
+                    "id": "c176dc07-192b-48ad-bdce-d6f43b5ca122",
                     "path": "<Keyboard>/a",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Right",
+                    "action": "Direction",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "Right",
+                    "id": "1be6ce90-e65e-4ffb-a85b-daa7128c84fa",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Direction",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -158,19 +138,10 @@
             "id": "6e859690-f4ea-4354-a11a-7ff1700f8b64",
             "actions": [
                 {
-                    "name": "MouseX",
-                    "type": "Value",
+                    "name": "Look",
+                    "type": "PassThrough",
                     "id": "d569aa61-0bef-4448-afe2-890a092225b2",
-                    "expectedControlType": "Axis",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
-                    "name": "MouseY",
-                    "type": "Value",
-                    "id": "f4ee6621-20bc-42ae-81bb-e3918cdade93",
-                    "expectedControlType": "Axis",
+                    "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -180,22 +151,11 @@
                 {
                     "name": "",
                     "id": "5262a82a-36ae-4e95-b753-a490b7ff514d",
-                    "path": "<Mouse>/delta/x",
+                    "path": "<Mouse>/delta",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "MouseX",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "1955812f-37d9-4288-888a-7bdfa5df8c7f",
-                    "path": "<Mouse>/delta/y",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "MouseY",
+                    "action": "Look",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

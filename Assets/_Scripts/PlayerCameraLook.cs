@@ -4,27 +4,54 @@ using UnityEngine;
 
 public class PlayerCameraLook : MonoBehaviour
 {
-    [SerializeField] private InputManager inputManager;
+    [SerializeField] private Transform playersBody;
 
-    [SerializeField] private float mouseSense = 0.1f;
-    [SerializeField] private Transform body;
+    [SerializeField] InputManager inputManager;
+    [Space]
+    [SerializeField] float mouseSense = 0.05f;
+    [SerializeField] float rotoationSmoothTime = 0.025f;
+    [SerializeField] bool blockHorizontalLook = false;
+    [SerializeField] bool blockVerticalLook = false;
+    [Range(-90, 90f)][SerializeField] float verticalLockAngle = 0f;
+    [Range(-180f, 180f)][SerializeField] float horizontalLockAngle = 0f;
+    [Space]
 
-    private float xRotation = 0f;
+    Vector2 mouseDelta;
+    float xRotation = 0f;
+    float xRotationVelocity = 0f;
+    float yRotationVelocity = 0f;
 
-    void Start()
+    private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
     }
 
-    void Update()
+    private void Update()
     {
-        float mouseX = inputManager.inputMaster.CameraLook.MouseX.ReadValue<float>() * mouseSense * Time.timeScale;
-        float mouseY = inputManager.inputMaster.CameraLook.MouseY.ReadValue<float>() * mouseSense * Time.timeScale;
+        mouseDelta = inputManager.inputMaster.CameraLook.Look.ReadValue<Vector2>() * mouseSense * Time.deltaTime;
+    }
 
-        xRotation -= mouseY;
+    private void LateUpdate()
+    {
+        RotatePlayer();
+    }
+
+    private void RotatePlayer()
+    {
+        xRotation = Mathf.SmoothDamp(xRotation, xRotation - mouseDelta.y, ref xRotationVelocity, rotoationSmoothTime);
         xRotation = Mathf.Clamp(xRotation, -90f, 90f);
 
-        transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
-        body.Rotate(Vector3.up * mouseX);
+
+        transform.localRotation = Quaternion.Euler(blockVerticalLook ? horizontalLockAngle : xRotation, 0f, 0f);
+
+        float yRotation = Mathf.SmoothDamp(0f, mouseDelta.x, ref yRotationVelocity, rotoationSmoothTime);
+        if (!blockHorizontalLook)
+        {
+            playersBody.Rotate(0f, yRotation, 0f);
+        }
+        else
+        {
+            playersBody.localRotation = Quaternion.Euler(playersBody.localRotation.x, verticalLockAngle, playersBody.localRotation.z);
+        }
     }
 }
