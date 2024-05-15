@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+
+    private void Start()
+    {
+        //Cursor.lockState = CursorLockMode.Locked;
+    }
+
     private void OnEnable()
     {
         Application.targetFrameRate = 60;

@@ -21,11 +21,6 @@ public class PlayerCameraLook : MonoBehaviour
     float xRotationVelocity = 0f;
     float yRotationVelocity = 0f;
 
-    private void Start()
-    {
-        Cursor.lockState = CursorLockMode.Locked;
-    }
-
     private void Update()
     {
         mouseDelta = inputManager.inputMaster.CameraLook.Look.ReadValue<Vector2>() * mouseSense * Time.deltaTime;

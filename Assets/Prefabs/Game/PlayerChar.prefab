@@ -66,7 +66,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 1000
+  far clip plane: 800
   field of view: 60
   orthographic: 0
   orthographic size: 5
@@ -107,12 +107,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playersBody: {fileID: 5262032961354177596}
   inputManager: {fileID: 5440138264369186353}
-  mouseSense: 1
-  rotoationSmoothTime: 0.025
+  mouseSense: 1.7
+  rotoationSmoothTime: 0
   blockHorizontalLook: 0
   blockVerticalLook: 0
-  horizontalLockAngle: 0
   verticalLockAngle: 0
+  horizontalLockAngle: 0
 --- !u!1 &5750994298764466011
 GameObject:
   m_ObjectHideFlags: 0
@@ -242,7 +242,7 @@ CharacterController:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 6145
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -256,7 +256,7 @@ CharacterController:
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
+  m_MinMoveDistance: 0
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &5440138264369186353
 MonoBehaviour:
@@ -283,10 +283,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputManager: {fileID: 5440138264369186353}
-  directionalMoveSmoothTime: 0.05
-  speed: 2
+  directionalMoveSmoothTime: 0.1
+  speed: 10
   runSpeed: 3
-  jumpHeight: 1
+  jumpHeight: 2
   maxJumpCharges: 2
   gravityValue: -9.81
   characterGravityScalar: 1.7

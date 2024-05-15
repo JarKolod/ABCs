@@ -7,9 +7,11 @@ public class PlayerMovement : MonoBehaviour
 {
     CharacterController playerCharController;
 
+    [Header("Dependencies")]
     [SerializeField] private InputManager inputManager;
     [SerializeField] float directionalMoveSmoothTime = 0.05f;
     [Space]
+    [Header("Player Parameters")]
     [SerializeField] float speed = 2.0f;
     [SerializeField] float runSpeed = 3.0f;
     [SerializeField] float jumpHeight = 1.0f;
@@ -17,13 +19,21 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float gravityValue = -9.81f;
     [SerializeField] float characterGravityScalar = 1.7f;
     [Space]
+    [Header("Move Disabling")]
+    [SerializeField] bool allowMoveLeft = true;
+    [SerializeField] bool allowMoveRight = true;
+    [SerializeField] bool allowMoveForward = true;
+    [SerializeField] bool allowMoveBack = true;
+    [SerializeField] bool allowJump = true;
+    [Space]
 
     Vector3 playerDirectionalMove;
     Vector3 directionalSmoothVelocity = Vector3.zero;
 
+    [Header("Move Player")]
+    [SerializeField] Vector3 playerInputDirections;
     float currentYFrameVelocity;
     float prevYFrameVelocity;
-    Vector3 playerInputDirections;
     private int currentJumpCharges;
     private float currentYVelocity;
 
@@ -61,6 +71,11 @@ public class PlayerMovement : MonoBehaviour
             onGrounded();
         }
 
+        if (!allowMoveForward && playerInputDirections.y > 0) playerInputDirections.y = 0;
+        if (!allowMoveBack && playerInputDirections.y < 0) playerInputDirections.y = 0;
+        if (!allowMoveLeft && playerInputDirections.x < 0) playerInputDirections.x = 0;
+        if (!allowMoveRight && playerInputDirections.x > 0) playerInputDirections.x = 0;
+
         Vector3 desiredDirectionalMove = transform.forward * playerInputDirections.y + transform.right * playerInputDirections.x;
         playerDirectionalMove = Vector3.SmoothDamp(playerDirectionalMove, desiredDirectionalMove, ref directionalSmoothVelocity, directionalMoveSmoothTime);
 
@@ -73,7 +88,7 @@ public class PlayerMovement : MonoBehaviour
     {
         float initialJumpAcceleration = Mathf.Sqrt(jumpHeight * 3f * -gravityValue);
 
-        if (currentJumpCharges > 0)
+        if (currentJumpCharges > 0 && allowJump)
         {
             currentYFrameVelocity += initialJumpAcceleration;
             currentJumpCharges--;
