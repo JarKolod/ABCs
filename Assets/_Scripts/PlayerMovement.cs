@@ -13,7 +13,6 @@ public class PlayerMovement : MonoBehaviour
     [Space]
     [Header("Player Parameters")]
     [SerializeField] float speed = 2.0f;
-    [SerializeField] float runSpeed = 3.0f;
     [SerializeField] float jumpHeight = 1.0f;
     [SerializeField] int maxJumpCharges = 2;
     [SerializeField] float gravityValue = -9.81f;
@@ -71,10 +70,7 @@ public class PlayerMovement : MonoBehaviour
             onGrounded();
         }
 
-        if (!allowMoveForward && playerInputDirections.y > 0) playerInputDirections.y = 0;
-        if (!allowMoveBack && playerInputDirections.y < 0) playerInputDirections.y = 0;
-        if (!allowMoveLeft && playerInputDirections.x < 0) playerInputDirections.x = 0;
-        if (!allowMoveRight && playerInputDirections.x > 0) playerInputDirections.x = 0;
+        ApplyDirectionalMovementRestrictions();
 
         Vector3 desiredDirectionalMove = transform.forward * playerInputDirections.y + transform.right * playerInputDirections.x;
         playerDirectionalMove = Vector3.SmoothDamp(playerDirectionalMove, desiredDirectionalMove, ref directionalSmoothVelocity, directionalMoveSmoothTime);
@@ -82,6 +78,14 @@ public class PlayerMovement : MonoBehaviour
         playerCharController.Move(Time.deltaTime * (playerDirectionalMove * speed + currentYFrameVelocity * Vector3.up));
 
         prevYFrameVelocity = currentYFrameVelocity;
+    }
+
+    private void ApplyDirectionalMovementRestrictions()
+    {
+        if (!allowMoveForward && playerInputDirections.y > 0) playerInputDirections.y = 0;
+        if (!allowMoveBack && playerInputDirections.y < 0) playerInputDirections.y = 0;
+        if (!allowMoveLeft && playerInputDirections.x < 0) playerInputDirections.x = 0;
+        if (!allowMoveRight && playerInputDirections.x > 0) playerInputDirections.x = 0;
     }
 
     private void OnJumpBtn(InputAction.CallbackContext ctx)

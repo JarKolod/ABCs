@@ -1,18 +1,23 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
+[RequireComponent(typeof(Collider))]
 public class ObsticaleSpawner : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] GameObject trackSectionSpawnsParent;
+
+    public Action onTrackSectionExitingSpawnPoint;
+
+    public GameObject Spawn(GameObject elementToSpawn, Transform spawnLocation)
     {
-        
+        return Instantiate(elementToSpawn, spawnLocation.transform.position, spawnLocation.transform.rotation, trackSectionSpawnsParent.transform);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter(Collider coll)
     {
-        
+        if (coll.gameObject.transform.tag.Equals("TrackSectionEnd"))
+        {
+            onTrackSectionExitingSpawnPoint();
+        }
     }
 }

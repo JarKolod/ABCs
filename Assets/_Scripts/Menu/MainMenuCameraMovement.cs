@@ -7,7 +7,6 @@ public class MainMenuCameraMovement : MonoBehaviour
 {
     [SerializeField] List<GameObject> cameraMovePoints;
     [SerializeField] float cameraSpeed = 2f;
-    [SerializeField] float smoothScalar = 0.5f;
     [SerializeField] float minDistanceToPoint = 0.1f;
 
     int nextMovePointIdx = -1;
