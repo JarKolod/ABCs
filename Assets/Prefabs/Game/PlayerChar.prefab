@@ -206,8 +206,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5262032961354177596}
   - component: {fileID: 1534831715608033144}
-  - component: {fileID: 5440138264369186353}
   - component: {fileID: 6775493044634129675}
+  - component: {fileID: 5440138264369186353}
   m_Layer: 0
   m_Name: PlayerChar
   m_TagString: Player
@@ -258,18 +258,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5440138264369186353
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7203158367252391976}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b822479bf2cf364487d6ce8afd208a9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &6775493044634129675
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -285,8 +273,25 @@ MonoBehaviour:
   inputManager: {fileID: 5440138264369186353}
   directionalMoveSmoothTime: 0.1
   speed: 10
-  runSpeed: 3
   jumpHeight: 2
   maxJumpCharges: 2
   gravityValue: -9.81
   characterGravityScalar: 1.7
+  allowMoveLeft: 1
+  allowMoveRight: 1
+  allowMoveForward: 1
+  allowMoveBack: 1
+  allowJump: 1
+  playerInputDirections: {x: 0, y: 0, z: 0}
+--- !u!114 &5440138264369186353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7203158367252391976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b822479bf2cf364487d6ce8afd208a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
