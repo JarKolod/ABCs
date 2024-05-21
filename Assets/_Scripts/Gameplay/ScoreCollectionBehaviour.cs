@@ -26,20 +26,25 @@ public class ScoreCollectionBehaviour : MonoBehaviour
     private void Start()
     {
         scoreAddCoroutine = StartCoroutine(AddScoreOnDistanceTravaled(scoreUpdateTimeInterval));
+        playerInvManager.onScoreAmountChange += UpdateScoreInstant;
     }
 
-    IEnumerator AddScoreOnDistanceTravaled(float timeInterval)
+    private IEnumerator AddScoreOnDistanceTravaled(float timeInterval)
     {
         while (true)
         {
             int calculatedScore = (int)Math.Ceiling(currentTrackSpeed * amountGainPerUnitDistance);
-
             playerInvManager.AddToScore(calculatedScore);
 
             scoreText.SetText(playerInvManager.currentScoreAmount.ToString());
 
             yield return new WaitForSeconds(timeInterval);
         }
+    }
+
+    public void UpdateScoreInstant(int _)
+    {
+        scoreText.SetText(playerInvManager.currentScoreAmount.ToString());
     }
 
     private void UpdateStoredTrackSpeed(float newTrackSpeed)

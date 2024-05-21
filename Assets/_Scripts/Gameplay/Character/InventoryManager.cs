@@ -6,7 +6,7 @@ public class InventoryManager : MonoBehaviour
     InventoryStorage invStorage;
 
     public Action<int> coinCountChange;
-    public Action<int> scoreAmountChange;
+    public Action<int> onScoreAmountChange;
 
     public int currentCoinAmount { get => invStorage.coinCount; }
     public int currentScoreAmount { get => invStorage.scoreAmount; }
@@ -19,13 +19,13 @@ public class InventoryManager : MonoBehaviour
     public void AddCoins(int amount)
     {
         invStorage.coinCount += amount;
-        coinCountChange?.Invoke(invStorage.coinCount);
-        AddToScore(invStorage.coinCount);
+        AddToScore(amount);
+        coinCountChange?.Invoke(amount);
     }
 
     public void AddToScore(int amount)
     {
         invStorage.scoreAmount += amount;
-        scoreAmountChange?.Invoke(invStorage.scoreAmount);
+        onScoreAmountChange?.Invoke(amount);
     }
 }

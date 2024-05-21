@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 7586114205623912061}
   - component: {fileID: 144391072066648776}
   - component: {fileID: 7783361102073962428}
-  - component: {fileID: 3090708540090850276}
   - component: {fileID: 3568562211148346870}
   m_Layer: 5
   m_Name: CoinCount
@@ -136,20 +135,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &3090708540090850276
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 917526005503653962}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8ee448944b28d2439ec182d90e9cfb1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PlayerInvManager: {fileID: 0}
-  coinText: {fileID: 7783361102073962428}
 --- !u!95 &3568562211148346870
 Animator:
   serializedVersion: 5

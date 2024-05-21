@@ -1,0 +1,14 @@
+.header {
+    font-size: 16px;
+    margin-left: 0;
+    margin-right: 0;
+    padding-right: 0;
+    padding-left: 5px;
+    -unity-font: url("project://database/Assets/Fonts/Pixel%20Digivolve.otf?fileID=12800000&guid=4924dd469da34b14e851594db8a70544&type=3#Pixel Digivolve");
+    -unity-font-definition: initial;
+}
+
+.popUpTextContent {
+    font-size: 20px;
+    color: rgb(255, 255, 255);
+}
