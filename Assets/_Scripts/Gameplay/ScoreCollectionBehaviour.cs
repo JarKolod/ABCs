@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
 
@@ -10,7 +9,7 @@ public class ScoreCollectionBehaviour : MonoBehaviour
     [SerializeField] TMPro.TextMeshProUGUI scoreText;
     [Description("uses speed of the track(rounded up) and multiplies with this amount")]
     [Range(0f,10f)]
-    [SerializeField] int amountGainPerUnitDistance;
+    [SerializeField] int pointsGainPerDistanceScalar;
     [Range(0f,1f)]
     [SerializeField] float scoreUpdateTimeInterval = 0.5f;
 
@@ -21,24 +20,20 @@ public class ScoreCollectionBehaviour : MonoBehaviour
     private void OnEnable()
     {
         TrackManager.OnTrackSpeedChange += UpdateStoredTrackSpeed;
-    }
-
-    private void Start()
-    {
-        scoreAddCoroutine = StartCoroutine(AddScoreOnDistanceTravaled(scoreUpdateTimeInterval));
         playerInvManager.onScoreAmountChange += UpdateScoreInstant;
+        scoreAddCoroutine = StartCoroutine(AddScoreOnDistanceTravaled(scoreUpdateTimeInterval));
     }
 
     private IEnumerator AddScoreOnDistanceTravaled(float timeInterval)
     {
         while (true)
         {
-            int calculatedScore = (int)Math.Ceiling(currentTrackSpeed * amountGainPerUnitDistance);
+            yield return new WaitForSeconds(timeInterval);
+
+            int calculatedScore = (int)Math.Ceiling(currentTrackSpeed * pointsGainPerDistanceScalar);
             playerInvManager.AddToScore(calculatedScore);
 
             scoreText.SetText(playerInvManager.currentScoreAmount.ToString());
-
-            yield return new WaitForSeconds(timeInterval);
         }
     }
 

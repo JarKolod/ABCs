@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayZoneBoundBehaviour : MonoBehaviour
@@ -14,7 +11,7 @@ public class PlayZoneBoundBehaviour : MonoBehaviour
     MeshRenderer boundRenderer;
     Color boundCurrentColor;
 
-    private void Start()
+    private void Awake()
     {
         boundColl = GetComponentInChildren<Collider>();
         boundRenderer = GetComponentInChildren<MeshRenderer>();

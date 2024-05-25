@@ -11,7 +11,7 @@ public class InventoryManager : MonoBehaviour
     public int currentCoinAmount { get => invStorage.coinCount; }
     public int currentScoreAmount { get => invStorage.scoreAmount; }
 
-    private void Start()
+    private void Awake()
     {
         invStorage = new InventoryStorage();
     }
@@ -19,7 +19,6 @@ public class InventoryManager : MonoBehaviour
     public void AddCoins(int amount)
     {
         invStorage.coinCount += amount;
-        AddToScore(amount);
         coinCountChange?.Invoke(amount);
     }
 

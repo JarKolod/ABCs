@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -12,9 +10,13 @@ public class CoinCollectionBehaviour : MonoBehaviour
 
     Animator coinTextAnimator;
 
-    private void OnEnable()
+    private void Awake()
     {
         coinTextAnimator = coinText.GetComponent<Animator>();
+    }
+
+    private void OnEnable()
+    {
         playerInvManager.coinCountChange += UpdateDisplayedCoinAmount;
     }
 
@@ -23,10 +25,9 @@ public class CoinCollectionBehaviour : MonoBehaviour
         if (other.transform.tag.Equals("Coin"))
         {
             playerInvManager.AddCoins(1);
-            playerInvManager.AddToScore(ScoreAddedOnCoinPickup);
+			playerInvManager.AddToScore(ScoreAddedOnCoinPickup);
+            Destroy(other.gameObject);
         }
-
-        Destroy(other.gameObject);
     }
 
     private void UpdateDisplayedCoinAmount(int _)

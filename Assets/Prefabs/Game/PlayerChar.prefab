@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4904166279568044057}
   - component: {fileID: 5219065029710912763}
   - component: {fileID: 2265098783628025435}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: MainPlayerCam
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -124,7 +124,7 @@ GameObject:
   - component: {fileID: 1618329964106940015}
   - component: {fileID: 2097903555364196636}
   - component: {fileID: 2557935761322285699}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: PlayerMesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -206,9 +206,12 @@ GameObject:
   m_Component:
   - component: {fileID: 5262032961354177596}
   - component: {fileID: 1534831715608033144}
+  - component: {fileID: 5194121787516195999}
+  - component: {fileID: 5248406291525718}
+  - component: {fileID: 3531293521733089260}
   - component: {fileID: 6775493044634129675}
   - component: {fileID: 5440138264369186353}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: PlayerChar
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -242,10 +245,10 @@ CharacterController:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 6145
+    m_Bits: 7169
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 114688
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -258,6 +261,49 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5194121787516195999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7203158367252391976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2edb01e1a49d51e409ef4bd7f9095bb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5248406291525718
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7203158367252391976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2b32406fe6cf754188e30e931b109e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerInvManager: {fileID: 5194121787516195999}
+  coinText: {fileID: 0}
+  ScoreAddedOnCoinPickup: 20
+--- !u!114 &3531293521733089260
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7203158367252391976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef76e3b5b7dd103429d7e5631070fffe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerInvManager: {fileID: 5194121787516195999}
+  scoreText: {fileID: 0}
+  pointsGainPerDistanceScalar: 2
+  scoreUpdateTimeInterval: 0.5
 --- !u!114 &6775493044634129675
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -17,6 +17,7 @@ public class TrackManager : MonoBehaviour
     [SerializeField] float _trackSpeed = 0.1f;
     [Range(0f, 1f)]
     [SerializeField] float trackAcceleration = 0.1f;
+    [SerializeField] float maxTrackSpeed = 10f;
     [SerializeField] float distanceBetweenTrackElementSpawns = 30f;
     [Space]
     [Header("Track properties")]
@@ -31,11 +32,9 @@ public class TrackManager : MonoBehaviour
 
     private void OnEnable()
     {
-
         obsticaleSpawner.onTrackSectionExitingSpawnPoint += OnTrackElementEnd;
         StartCoroutine(InfiniteSpawnStart());
         StartCoroutine(UpdateTrackAcceleration());
-
     }
 
     private void Start()
@@ -50,7 +49,7 @@ public class TrackManager : MonoBehaviour
 
     private IEnumerator UpdateTrackAcceleration()
     {
-        while (true)
+        while (maxTrackSpeed > _trackSpeed)
         {
             yield return new WaitUntil(() =>
             {
@@ -60,6 +59,9 @@ public class TrackManager : MonoBehaviour
             _trackSpeed += trackAcceleration * GameManager.gameplayTime * Time.deltaTime;
             OnTrackSpeedChange?.Invoke(_trackSpeed);
         }
+        gameplayTimeAccelerationCount++;
+        _trackSpeed = maxTrackSpeed;
+        OnTrackSpeedChange?.Invoke(_trackSpeed);
     }
 
     private void OnTrackElementEnd()
@@ -72,7 +74,7 @@ public class TrackManager : MonoBehaviour
         while (distanceTravelledSinceLastElementSpawn < distanceBetweenTrackElementSpawns)
         {
             yield return new WaitForSeconds(0.5f);
-            distanceTravelledSinceLastElementSpawn += _trackSpeed; //cos z tym gdzie to dac?
+            distanceTravelledSinceLastElementSpawn += _trackSpeed; //cos z tym, gdzie to dac?
         }
     }
 

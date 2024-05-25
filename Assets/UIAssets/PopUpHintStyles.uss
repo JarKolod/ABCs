@@ -6,9 +6,48 @@
     padding-left: 5px;
     -unity-font: url("project://database/Assets/Fonts/Pixel%20Digivolve.otf?fileID=12800000&guid=4924dd469da34b14e851594db8a70544&type=3#Pixel Digivolve");
     -unity-font-definition: initial;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
 
 .popUpTextContent {
     font-size: 20px;
     color: rgb(255, 255, 255);
+}
+
+.button {
+    -unity-font: url("project://database/Assets/Fonts/upheavtt.ttf?fileID=12800000&guid=edcdf4c43489e32459a3124b802d6a9d&type=3#upheavtt");
+    font-size: 25px;
+    -unity-text-align: middle-center;
+    white-space: normal;
+    background-color: rgba(255, 124, 124, 0);
+    max-height: initial;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    padding-top: 5px;
+    padding-right: 5px;
+    padding-bottom: 5px;
+    padding-left: 8px;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    text-overflow: clip;
+    border-left-color: rgba(0, 0, 0, 0);
+    border-right-color: rgba(0, 0, 0, 0);
+    border-top-color: rgba(0, 0, 0, 0);
+    border-bottom-color: rgba(0, 0, 0, 0);
+    transition-duration: 0.25s;
+    transition-timing-function: ease-in-sine;
+}
+
+.button:hover {
+    background-color: rgba(255, 64, 64, 0.66);
+}
+
+.button:active {
+    background-color: rgb(202, 41, 41);
 }
