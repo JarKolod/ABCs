@@ -13,6 +13,6 @@ public class TimePlayedDisplay : MonoBehaviour
 
     private void LateUpdate()
     {
-        elaspedTimeText.SetText(TimeSpan.FromSeconds(GameManager.gameplayTime).ToString(@"mm\:ss"));
+        elaspedTimeText.SetText(TimeSpan.FromSeconds(Time.timeSinceLevelLoad).ToString(@"mm\:ss"));
     }
 }

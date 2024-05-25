@@ -53,10 +53,10 @@ public class TrackManager : MonoBehaviour
         {
             yield return new WaitUntil(() =>
             {
-                return GameManager.gameplayTime > gameplayTimeAccelerationCount * gameplayTimeAccelerationInterval;
+                return Time.timeSinceLevelLoad > gameplayTimeAccelerationCount * gameplayTimeAccelerationInterval;
             });
             gameplayTimeAccelerationCount++;
-            _trackSpeed += trackAcceleration * GameManager.gameplayTime * Time.deltaTime;
+            _trackSpeed += trackAcceleration * Time.timeSinceLevelLoad * Time.deltaTime;
             OnTrackSpeedChange?.Invoke(_trackSpeed);
         }
         gameplayTimeAccelerationCount++;
