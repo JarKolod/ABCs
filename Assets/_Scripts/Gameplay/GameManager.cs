@@ -1,39 +1,45 @@
 using Newtonsoft.Json;
 using popuphints;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+public enum GameState
+{
+    Guide,
+    Challenge,
+    Menu
+}
+
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance { get; private set; }
 
+    private GameState _gameState;
     private InventoryManager playerInvManager;
 
     private IDataService dataService = new JsonDataService();
 
+    private bool isHighScoreSavingAllowed = true;
+
+    [SerializeField] List<string> nonHighScoreScenes = new();
+
+    public GameState gameState { get => _gameState; }
+
     private void Awake()
     {
         CheckSingleton();
-
-        // why did i need this?
-        // trackManager = FindFirstObjectByType<TrackManager>();
+        SceneManager.sceneLoaded += OnSceneLoad;
     }
-
 
     private void Start()
     {
-        //DisableCursor();
-        playerInvManager = FindFirstObjectByType<InventoryManager>();
-
-        InventoryStorage loadedInv = LoadHighScoreData();
-        if (loadedInv.highScores.Count > 0)
-        {
-            playerInvManager.SwapHighScores(loadedInv);
-        }
+        DisableCursor();
+        OnSceneLoad(SceneManager.GetActiveScene(), LoadSceneMode.Single);
     }
 
     private void OnEnable()
@@ -54,10 +60,27 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void SavePlayersHighScores()
+    public void SetGameState(GameState gameState)
     {
-        // maybe create list with non level scenes? - too tiered to think about it now
-        if (SceneManager.GetActiveScene().name != "Main_Menu")
+        this._gameState = gameState;
+    }
+
+    private void OnSceneLoad(Scene scene, LoadSceneMode loadMode)
+    {
+        playerInvManager = FindFirstObjectByType<InventoryManager>();
+
+        isHighScoreSavingAllowed = playerInvManager == null ? false : true;
+    }
+
+    public bool SavePlayersHighScores()
+    {
+        if(!isHighScoreSavingAllowed)
+        {
+            Debug.Log("Saving is not allowed in this scene: " + SceneManager.GetActiveScene().name);
+            return false;
+        }
+
+        if (!nonHighScoreScenes.Contains(SceneManager.GetActiveScene().name))
         {
             playerInvManager.AddCurrentHighScoreDataToInv();
         }
@@ -66,10 +89,12 @@ public class GameManager : MonoBehaviour
         {
             InventoryStorage invHighScoreDataAfterLoad = LoadHighScoreData();
             playerInvManager.SwapHighScores(invHighScoreDataAfterLoad);
+            return true;
         }
         else
         {
             Debug.LogError("Could not save file!");
+            return true;
         }
     }
 
@@ -77,13 +102,19 @@ public class GameManager : MonoBehaviour
     {
         try
         {
-            InventoryStorage data = dataService.LoadData<InventoryStorage>("/player_data.json", false);
-            return data;
+            if (dataService.LoadData("/player_data.json", out InventoryStorage data, false))
+            {
+                return data;
+            }
+            else
+            {
+                return new InventoryStorage();
+            }
         }
         catch (Exception e)
         {
             Debug.LogError($"Could not read file! err: " + e.Message + ", " + e.Source);
-            throw new Exception("Could not read file! err: \" + e.Message + \", \" + e.Source"); // for handling later
+            return new InventoryStorage();
         }
     }
 

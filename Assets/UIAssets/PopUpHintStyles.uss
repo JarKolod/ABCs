@@ -51,3 +51,6 @@
 .button:active {
     background-color: rgb(202, 41, 41);
 }
+
+.paragraf_text {
+}

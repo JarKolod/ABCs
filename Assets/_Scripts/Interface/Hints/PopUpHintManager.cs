@@ -8,14 +8,9 @@ namespace popuphints
     {
         public static PopUpHintManager instance { get; private set; }
 
-        GameManager gameManager;
-        GameObject hintBeingDisplayed;
         [SerializeField] GameObject onLevelStartHint;
 
-        private void Awake()
-        {
-            gameManager = GameManager.instance;
-        }
+        GameObject hintBeingDisplayed;
 
         private void OnEnable()
         {
@@ -24,14 +19,9 @@ namespace popuphints
 
         private void Start()
         {
-            if(onLevelStartHint)
-            {
-                GameManager.instance.DisplayHint(onLevelStartHint);
-            }
-            else
-            {
-                Debug.Log("No Hint on Start up");
-            }
+            // coinRotation Script breaks if not for 0.1s buffer i dont know why
+            // not inilizaed maybe but it should wait
+            Invoke("DisplayHintOnStart", 0.1f); 
         }
 
         private void CheckSingleton()
@@ -46,6 +36,19 @@ namespace popuphints
                 Destroy(gameObject);
             }
         }
+
+        private void DisplayHintOnStart()
+        {
+            if (onLevelStartHint)
+            {
+                GameManager.instance.DisplayHint(onLevelStartHint);
+            }
+            else
+            {
+                Debug.Log("No Hint on Start up");
+            }
+        }
+
 
         public void InstantiatePopUpHint(GameObject hintPrefab)
         {

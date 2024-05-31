@@ -1,6 +1,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using UnityEditor.Timeline.Actions;
 using UnityEngine;
 
 [System.Serializable]
@@ -17,4 +18,6 @@ public class InventoryStorage
     [JsonIgnore]
     public int scoreAmount { get => _scoreCount; set => _scoreCount = value > 0 ? value : 0; }
     public Dictionary<string, Dictionary<DateTime, int>> highScores { get => _highScores; set => _highScores = value; }
+
+    public InventoryStorage() { }
 }

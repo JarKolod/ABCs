@@ -8,7 +8,7 @@ public class RotationAndMovement : MonoBehaviour
     [SerializeField] float smoothness = 0.1f;
     private float currentVelocity = 0f;
 
-    void Update()
+    void LateUpdate()
     {
         transform.Rotate(Vector3.forward, rotationSpeed * Time.deltaTime);
 

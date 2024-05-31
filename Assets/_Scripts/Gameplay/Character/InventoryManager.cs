@@ -11,6 +11,8 @@ public class InventoryManager : MonoBehaviour
     public Action<int> coinCountChange;
     public Action<int> onScoreAmountChange;
 
+    public readonly List<string> noHighScoreLevels = new(){ "Main_Menu", "Level_Template" };
+
     public int currentCoinAmount { get => invStorage.coinCount; }
     public int currentScoreAmount { get => invStorage.scoreAmount; }
     public InventoryStorage InvStorage { get => invStorage; }
@@ -58,6 +60,44 @@ public class InventoryManager : MonoBehaviour
         }
 
         invStorage.highScores = new Dictionary<string, Dictionary<DateTime, int>>(inv.highScores);
+    }
+
+    public static Dictionary<string, Dictionary<DateTime, int>> MergeHighScores(
+    Dictionary<string, Dictionary<DateTime, int>> firstHighScores,
+    Dictionary<string, Dictionary<DateTime, int>> secondHighScores)
+    {
+        foreach (var levelEntry in secondHighScores)
+        {
+            string levelName = levelEntry.Key;
+            Dictionary<DateTime, int> secondLevelScores = levelEntry.Value;
+
+            if (!firstHighScores.ContainsKey(levelName))
+            {
+                firstHighScores[levelName] = new Dictionary<DateTime, int>(secondLevelScores);
+            }
+            else
+            {
+                Dictionary<DateTime, int> firstLevelScores = firstHighScores[levelName];
+
+                foreach (var scoreEntry in secondLevelScores)
+                {
+                    DateTime scoreDate = scoreEntry.Key;
+                    int secondScore = scoreEntry.Value;
+
+                    if (!firstLevelScores.ContainsKey(scoreDate))
+                    {
+                        firstLevelScores[scoreDate] = secondScore;
+                    }
+                    else
+                    {
+                        int firstScore = firstLevelScores[scoreDate];
+                        firstLevelScores[scoreDate] = Math.Max(firstScore, secondScore);
+                    }
+                }
+            }
+        }
+
+        return firstHighScores;
     }
 
 }

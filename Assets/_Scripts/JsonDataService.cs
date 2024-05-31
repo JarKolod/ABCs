@@ -37,25 +37,28 @@ public class JsonDataService : IDataService
     }
 
 
-    public T LoadData<T>(string RelativePath, bool Encrypted)
+    public bool LoadData<T>(string relativePath, out T data, bool encrypted) where T : class, new()
     {
-        string path = Application.persistentDataPath + RelativePath;
+        string path = Application.persistentDataPath + relativePath;
 
         if (!File.Exists(path))
         {
-            Debug.LogError($"Cannot load file at {path}. File does not exist returnig null!");
-            return default;
+            Debug.LogError($"Cannot load file at {path}. File does not exist, returning null!");
+            data = null;
+            return false;
         }
 
         try
         {
-            T data = JsonConvert.DeserializeObject<T>(File.ReadAllText(path));
-            return data;
+            string fileContent = File.ReadAllText(path);
+            data = JsonConvert.DeserializeObject<T>(fileContent);
+            return true;
         }
-        catch (Exception e)
+        catch (Exception ex)
         {
-            Debug.LogError($"Failed to load data due to: {e.Message} {e.StackTrace}");
-            throw e;
+            Debug.LogError($"Error loading file at {path}. Exception: {ex.Message}");
+            data = null;
+            return false;
         }
     }
 }

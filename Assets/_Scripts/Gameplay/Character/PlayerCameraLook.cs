@@ -12,7 +12,7 @@ public class PlayerCameraLook : MonoBehaviour
     [SerializeField] float rotoationSmoothTime = 0.025f;
     [SerializeField] bool blockHorizontalLook = false;
     [SerializeField] bool blockVerticalLook = false;
-    [Range(-90, 90f)][SerializeField] float verticalLockAngle = 0f;
+    [Range(-180, 180f)][SerializeField] float verticalLockAngle = 0f;
     [Range(-180f, 180f)][SerializeField] float horizontalLockAngle = 0f;
     [Space]
 

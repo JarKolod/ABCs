@@ -15,13 +15,13 @@ public class TrackManager : MonoBehaviour
     [Space]
     [Header("Spawning properties")]
     [SerializeField] float _trackSpeed = 0.1f;
-    [Range(0f, 1f)]
-    [SerializeField] float trackAcceleration = 0.1f;
+    [Range(0f, 10f)]
+    [SerializeField] float trackAccelerationScalar = 0.1f;
     [SerializeField] float maxTrackSpeed = 10f;
     [SerializeField] float distanceBetweenTrackElementSpawns = 30f;
     [Space]
     [Header("Track properties")]
-    [SerializeField] float gameplayTimeAccelerationInterval = 30f;
+    [SerializeField] float trackAccelerationIntervalsSec = 30f;
 
     List<GameObject> spawnedTrackSections = new();
 
@@ -53,10 +53,10 @@ public class TrackManager : MonoBehaviour
         {
             yield return new WaitUntil(() =>
             {
-                return Time.timeSinceLevelLoad > gameplayTimeAccelerationCount * gameplayTimeAccelerationInterval;
+                return Time.timeSinceLevelLoad > gameplayTimeAccelerationCount * trackAccelerationIntervalsSec;
             });
             gameplayTimeAccelerationCount++;
-            _trackSpeed += trackAcceleration * Time.timeSinceLevelLoad * Time.deltaTime;
+            _trackSpeed += trackAccelerationScalar * Time.timeSinceLevelLoad * Time.deltaTime;
             OnTrackSpeedChange?.Invoke(_trackSpeed);
         }
         gameplayTimeAccelerationCount++;

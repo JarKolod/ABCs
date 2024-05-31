@@ -1,17 +1,19 @@
+using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PopUpHintSpawnerOnPlayerCollision : MonoBehaviour
 {
     [SerializeField] GameObject hintPrefab;
-    [SerializeField] LayerMask popUpOnCollisionLayer; // asigned "Player" in editor
+    [SerializeField] LayerMask popUpOnCollisionLayer;
 
-    bool hasHintBeenDisplayer = false;  
+    static List<string> tagsHit = new();
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!hasHintBeenDisplayer && CommonUtils.IsLayerInLayerMask(other.gameObject.layer, popUpOnCollisionLayer) && hintPrefab != null)
+        if (!tagsHit.Contains(transform.tag) && CommonUtils.IsLayerInLayerMask(other.gameObject.layer, popUpOnCollisionLayer) && hintPrefab != null)
         {
-            hasHintBeenDisplayer = true;
+            tagsHit.Add(transform.tag);
             GameManager.instance.DisplayHint(hintPrefab);
         }
     }

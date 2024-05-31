@@ -206,10 +206,12 @@ GameObject:
   m_Component:
   - component: {fileID: 5262032961354177596}
   - component: {fileID: 1534831715608033144}
+  - component: {fileID: 4328711499368593167}
   - component: {fileID: 5194121787516195999}
   - component: {fileID: 5248406291525718}
   - component: {fileID: 3531293521733089260}
   - component: {fileID: 6775493044634129675}
+  - component: {fileID: 1573991201222159560}
   - component: {fileID: 5440138264369186353}
   m_Layer: 10
   m_Name: PlayerChar
@@ -245,7 +247,7 @@ CharacterController:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 7169
+    m_Bits: 15361
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 114688
@@ -260,6 +262,29 @@ CharacterController:
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!136 &4328711499368593167
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7203158367252391976}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 2.2
+  m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &5194121787516195999
 MonoBehaviour:
@@ -321,7 +346,7 @@ MonoBehaviour:
   speed: 10
   jumpHeight: 2
   maxJumpCharges: 2
-  gravityValue: -9.81
+  gravityValue: -10
   characterGravityScalar: 1.7
   allowMoveLeft: 1
   allowMoveRight: 1
@@ -329,6 +354,18 @@ MonoBehaviour:
   allowMoveBack: 1
   allowJump: 1
   playerInputDirections: {x: 0, y: 0, z: 0}
+--- !u!114 &1573991201222159560
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7203158367252391976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dccb84ff4d6be9140ac5a1e9459de7c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &5440138264369186353
 MonoBehaviour:
   m_ObjectHideFlags: 0
