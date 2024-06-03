@@ -1,15 +1,19 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.Collections.LowLevel.Unsafe;
+using Unity.VisualScripting;
 using UnityEngine;
 
+// TODO: create a death plane for spawned track sections
 public class TrackManager : MonoBehaviour
 {
     public static Action<float> OnTrackSpeedChange; // takes trackSpeed as argument
 
     [Header("Setup")]
     [SerializeField] ObsticaleSpawner obsticaleSpawner;
+    [SerializeField] float finalPositionOfSpawnPointOZ;
     [SerializeField] GameObject spawningPoint;
     [SerializeField] List<GameObject> trackSections;
     [Space]
@@ -17,7 +21,7 @@ public class TrackManager : MonoBehaviour
     [SerializeField] float _trackSpeed = 0.1f;
     [Range(0f, 10f)]
     [SerializeField] float trackAccelerationScalar = 0.1f;
-    [SerializeField] float maxTrackSpeed = 10f;
+    [SerializeField] float _maxTrackSpeed = 10f;
     [SerializeField] float distanceBetweenTrackElementSpawns = 30f;
     [Space]
     [Header("Track properties")]
@@ -28,11 +32,15 @@ public class TrackManager : MonoBehaviour
     float distanceTravelledSinceLastElementSpawn = 0f;
     int gameplayTimeAccelerationCount = 1;
 
-    Coroutine mesureDistanceBetweenSpawns;
+    Coroutine measureDistanceBetweenSpawns;
+
+    public float maxTrackSpeed { get => _maxTrackSpeed; }
+    public float trackSpeed { get => _trackSpeed; }
 
     private void OnEnable()
     {
         obsticaleSpawner.onTrackSectionExitingSpawnPoint += OnTrackElementEnd;
+        obsticaleSpawner.onTrackSectionEnteringSpawnPoint += UpdateSpawnerPosition;
         StartCoroutine(InfiniteSpawnStart());
         StartCoroutine(UpdateTrackAcceleration());
     }
@@ -49,7 +57,7 @@ public class TrackManager : MonoBehaviour
 
     private IEnumerator UpdateTrackAcceleration()
     {
-        while (maxTrackSpeed > _trackSpeed)
+        while (_maxTrackSpeed > _trackSpeed)
         {
             yield return new WaitUntil(() =>
             {
@@ -60,7 +68,7 @@ public class TrackManager : MonoBehaviour
             OnTrackSpeedChange?.Invoke(_trackSpeed);
         }
         gameplayTimeAccelerationCount++;
-        _trackSpeed = maxTrackSpeed;
+        _trackSpeed = _maxTrackSpeed;
         OnTrackSpeedChange?.Invoke(_trackSpeed);
     }
 
@@ -86,13 +94,36 @@ public class TrackManager : MonoBehaviour
         }
     }
 
+    private void UpdateSpawnerPosition()
+    {
+        GameObject lastSection = spawnedTrackSections.Last();
+        GameObject lastSectionEndPoint = CommonUtils.FindChildWithTag(lastSection, "TrackSectionEnd");
+        if (lastSectionEndPoint != null)
+        {
+            if (lastSectionEndPoint.transform.position.z <= finalPositionOfSpawnPointOZ)
+            {
+                obsticaleSpawner.transform.position = new Vector3(obsticaleSpawner.transform.position.x, obsticaleSpawner.transform.position.y, finalPositionOfSpawnPointOZ);
+                obsticaleSpawner.onTrackSectionEnteringSpawnPoint -= UpdateSpawnerPosition;
+            }
+            else
+            {
+                obsticaleSpawner.transform.position = obsticaleSpawner.transform.position = new Vector3(obsticaleSpawner.transform.position.x, obsticaleSpawner.transform.position.y, lastSectionEndPoint.transform.position.z);
+
+            }
+        }
+        else
+        {
+            throw new Exception("Section does not have an end point!");
+        }
+    }
+
     private IEnumerator InfiniteSpawnStart()
     {
         while (true)
         {
-            if (mesureDistanceBetweenSpawns != null)
+            if (measureDistanceBetweenSpawns != null)
             {
-                StopCoroutine(mesureDistanceBetweenSpawns);
+                StopCoroutine(measureDistanceBetweenSpawns);
             }
             distanceTravelledSinceLastElementSpawn = 0;
             spawnedTrackSections.Add(obsticaleSpawner.Spawn(trackSections[UnityEngine.Random.Range(0, trackSections.Count)], spawningPoint.transform));

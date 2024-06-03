@@ -7,17 +7,23 @@ public class ObsticaleSpawner : MonoBehaviour
     [SerializeField] GameObject trackSectionSpawnsParent;
 
     public Action onTrackSectionExitingSpawnPoint;
+    public Action onTrackSectionEnteringSpawnPoint;
 
     public GameObject Spawn(GameObject elementToSpawn, Transform spawnLocation)
     {
-        return Instantiate(elementToSpawn, spawnLocation.transform.position, spawnLocation.transform.rotation, trackSectionSpawnsParent.transform);
+        return Instantiate(elementToSpawn, spawnLocation.transform.position, spawnLocation.transform.rotation);
     }
 
     private void OnTriggerEnter(Collider coll)
     {
-        if (coll.gameObject.transform.tag.Equals("TrackSectionEnd"))
+        if (onTrackSectionExitingSpawnPoint != null && coll.gameObject.transform.tag.Equals("TrackSectionEnd"))
         {
             onTrackSectionExitingSpawnPoint();
+        }
+
+        if (onTrackSectionEnteringSpawnPoint != null && coll.gameObject.transform.tag.Equals("TrackSectionStart"))
+        {
+            onTrackSectionEnteringSpawnPoint();
         }
     }
 }

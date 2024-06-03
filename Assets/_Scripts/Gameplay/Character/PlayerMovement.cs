@@ -65,11 +65,6 @@ public class PlayerMovement : MonoBehaviour
     {
         ApplyGravity();
 
-        if (playerCharController.isGrounded)
-        {
-            onGrounded();
-        }
-
         ApplyDirectionalMovementRestrictions();
 
         Vector3 desiredDirectionalMove = transform.forward * playerInputDirections.y + transform.right * playerInputDirections.x;
@@ -78,6 +73,14 @@ public class PlayerMovement : MonoBehaviour
         playerCharController.Move(Time.deltaTime * (playerDirectionalMove * speed + currentYFrameVelocity * Vector3.up));
 
         prevYFrameVelocity = currentYFrameVelocity;
+    }
+
+    private void FixedUpdate()
+    {
+        if (playerCharController.isGrounded)
+        {
+            onGrounded();
+        }
     }
 
     private void ApplyDirectionalMovementRestrictions()
@@ -90,12 +93,13 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnJumpBtn(InputAction.CallbackContext ctx)
     {
+        print(currentJumpCharges);
         float initialJumpAcceleration = Mathf.Sqrt(jumpHeight * 3f * -gravityValue);
 
         if (currentJumpCharges > 0 && allowJump)
         {
-            currentYFrameVelocity += initialJumpAcceleration;
-            currentJumpCharges--;
+            --currentJumpCharges;
+            currentYFrameVelocity = initialJumpAcceleration;
         }
     }
 

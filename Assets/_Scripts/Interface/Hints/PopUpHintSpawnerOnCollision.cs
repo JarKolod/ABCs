@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class PopUpHintSpawnerOnPlayerCollision : MonoBehaviour
+public class PopUpHintSpawnerOnCollision : MonoBehaviour
 {
     [SerializeField] GameObject hintPrefab;
     [SerializeField] LayerMask popUpOnCollisionLayer;

@@ -26,7 +26,19 @@ public class CoinCollectionBehaviour : MonoBehaviour
         {
             playerInvManager.AddCoins(1);
 			playerInvManager.AddToScore(ScoreAddedOnCoinPickup);
-            Destroy(other.gameObject);
+
+            AudioSource coinSound = other.gameObject.GetComponent<AudioSource>();
+
+            if(coinSound)
+            {
+                coinSound.Play();
+                Destroy(other.gameObject, coinSound.clip.length);
+            }
+            else
+            {
+                Destroy(other.gameObject);
+            }
+
         }
     }
 

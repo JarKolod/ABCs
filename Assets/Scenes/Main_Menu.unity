@@ -696,7 +696,6 @@ MonoBehaviour:
   - {fileID: 1214285327}
   - {fileID: 703221544}
   cameraSpeed: 0.1
-  smoothScalar: 0.5
   minDistanceToPoint: 1
 --- !u!81 &444297522
 AudioListener:
@@ -927,8 +926,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 610.8783, y: -365.12943}
-  m_SizeDelta: {x: 1121.7566, y: 92.89412}
+  m_AnchoredPosition: {x: 610.8783, y: -364.89075}
+  m_SizeDelta: {x: 1121.7566, y: 92.82593}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &667932425
 MonoBehaviour:
@@ -1060,8 +1059,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 610.8783, y: -56.44706}
-  m_SizeDelta: {x: 1121.7566, y: 92.89412}
+  m_AnchoredPosition: {x: 610.8783, y: -56.412964}
+  m_SizeDelta: {x: 1121.7566, y: 92.82593}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &690652502
 MonoBehaviour:
@@ -1854,8 +1853,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 610.8783, y: -262.2353}
-  m_SizeDelta: {x: 1121.7566, y: 92.89412}
+  m_AnchoredPosition: {x: 610.8783, y: -262.06482}
+  m_SizeDelta: {x: 1121.7566, y: 92.82593}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &963295037
 MonoBehaviour:
@@ -2165,8 +2164,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 610.8783, y: -159.34119}
-  m_SizeDelta: {x: 1121.7566, y: 92.89412}
+  m_AnchoredPosition: {x: 610.8783, y: -159.23889}
+  m_SizeDelta: {x: 1121.7566, y: 92.82593}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1300406837
 MonoBehaviour:
@@ -2810,6 +2809,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3658d1d22405234489042d77ea7a301, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nonHighScoreScenes: []
 --- !u!224 &1696083191 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8673361073203662561, guid: 33b2cb2991e21cb4ab2df299d993af35, type: 3}

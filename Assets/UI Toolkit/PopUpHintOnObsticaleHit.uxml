@@ -1,0 +1,14 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UIAssets/PopUpHintStyles.uss?fileID=7433441132597879392&amp;guid=99c887a4b47b6724ca1ab8dc8595b44b&amp;type=3#PopUpHintStyles" />
+    <ui:VisualElement name="HintEncapsulation" style="flex-grow: 1; width: 40%; height: 40px; flex-wrap: nowrap; flex-direction: column; align-self: center; justify-content: center; align-items: auto; -unity-text-align: upper-left;">
+        <ui:VisualElement name="HintContainer" style="flex-grow: 1; max-height: 40%; border-left-color: rgba(255, 0, 0, 0); border-right-color: rgba(255, 0, 0, 0); border-top-color: rgba(255, 0, 0, 0); border-bottom-color: rgba(255, 0, 0, 0); border-top-left-radius: 10px; border-top-right-radius: 10px; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px; border-top-width: 10px; border-right-width: 10px; border-bottom-width: 10px; border-left-width: 10px;">
+            <ui:VisualElement style="flex-grow: 1; flex-direction: row; align-items: center; justify-content: space-between; position: relative; right: 0; left: 0; top: 0; flex-shrink: 1; height: auto; max-height: 30px; min-height: 20px; background-color: rgb(183, 183, 183);">
+                <ui:Label tabindex="-1" text="Skules sie!" parse-escape-sequences="true" display-tooltip-when-elided="true" name="PopUpHintTitle" class="header" />
+                <ui:Button text="X" name="ExitHintBtn" class="button" style="-unity-font-style: normal; -unity-font-definition: initial;" />
+            </ui:VisualElement>
+            <ui:ScrollView scroll-deceleration-rate="0,135" elasticity="0.3" mouse-wheel-scroll-size="40" style="flex-wrap: wrap; align-items: center; align-self: center; height: auto; background-color: rgb(72, 72, 72);">
+                <ui:Label tabindex="-1" text="Ojej! Uderzyłeś w przeszkodę. W większości gier oznacza to koniec gry, ale w tym poradniku możesz ćwiczyć bez końca.&#10;&#10;Jeśli uznasz, że zapoznałeś się już z poradnikiem poruszania się (tym levelem), możesz nacisnąć przycisk Escape na klawiaturze, przejść do menu głównego i wybrać stamtąd opcję &apos;Wyzwania&apos; i spróbować swoich sił w podobnej grze bez bocznych kółek. Powodzenia!" parse-escape-sequences="true" display-tooltip-when-elided="true" class="popUpTextContent" style="align-items: stretch; flex-wrap: wrap-reverse; height: auto; flex-direction: column; align-self: flex-start; white-space: normal; flex-grow: 0;" />
+            </ui:ScrollView>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
