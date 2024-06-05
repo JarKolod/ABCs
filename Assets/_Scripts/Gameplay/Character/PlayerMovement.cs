@@ -93,7 +93,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnJumpBtn(InputAction.CallbackContext ctx)
     {
-        print(currentJumpCharges);
         float initialJumpAcceleration = Mathf.Sqrt(jumpHeight * 3f * -gravityValue);
 
         if (currentJumpCharges > 0 && allowJump)

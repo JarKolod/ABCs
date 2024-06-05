@@ -17,13 +17,6 @@ namespace popuphints
             CheckSingleton();
         }
 
-        private void Start()
-        {
-            // coinRotation Script breaks if not for 0.1s buffer i dont know why
-            // not inilizaed maybe but it should wait
-            Invoke("DisplayHintOnStart", 0.1f); 
-        }
-
         private void CheckSingleton()
         {
             if (instance == null)
@@ -37,19 +30,6 @@ namespace popuphints
             }
         }
 
-        private void DisplayHintOnStart()
-        {
-            if (onLevelStartHint)
-            {
-                GameManager.instance.DisplayHint(onLevelStartHint);
-            }
-            else
-            {
-                Debug.Log("No Hint on Start up");
-            }
-        }
-
-
         public void InstantiatePopUpHint(GameObject hintPrefab)
         {
             if (hintBeingDisplayed == null)
@@ -62,6 +42,11 @@ namespace popuphints
         {
             GameManager.instance.OnHintDestroy();
             hintBeingDisplayed = null;
+        }
+
+        public bool isHintBeingDisplayed()
+        {
+            return hintBeingDisplayed != null;
         }
     }
 }

@@ -182,6 +182,34 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Interface"",
+            ""id"": ""2f00cbc1-b1d9-46c1-b3fb-a3f29280a763"",
+            ""actions"": [
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""01b8e2b1-e3fc-4021-8f6e-b116efba2baa"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""93061727-caba-43da-856d-44b6b20f2ff0"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -195,6 +223,9 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
         // CameraLook
         m_CameraLook = asset.FindActionMap("CameraLook", throwIfNotFound: true);
         m_CameraLook_Look = m_CameraLook.FindAction("Look", throwIfNotFound: true);
+        // Interface
+        m_Interface = asset.FindActionMap("Interface", throwIfNotFound: true);
+        m_Interface_Pause = m_Interface.FindAction("Pause", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -368,6 +399,52 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
         }
     }
     public CameraLookActions @CameraLook => new CameraLookActions(this);
+
+    // Interface
+    private readonly InputActionMap m_Interface;
+    private List<IInterfaceActions> m_InterfaceActionsCallbackInterfaces = new List<IInterfaceActions>();
+    private readonly InputAction m_Interface_Pause;
+    public struct InterfaceActions
+    {
+        private @InputMaster m_Wrapper;
+        public InterfaceActions(@InputMaster wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Pause => m_Wrapper.m_Interface_Pause;
+        public InputActionMap Get() { return m_Wrapper.m_Interface; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(InterfaceActions set) { return set.Get(); }
+        public void AddCallbacks(IInterfaceActions instance)
+        {
+            if (instance == null || m_Wrapper.m_InterfaceActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_InterfaceActionsCallbackInterfaces.Add(instance);
+            @Pause.started += instance.OnPause;
+            @Pause.performed += instance.OnPause;
+            @Pause.canceled += instance.OnPause;
+        }
+
+        private void UnregisterCallbacks(IInterfaceActions instance)
+        {
+            @Pause.started -= instance.OnPause;
+            @Pause.performed -= instance.OnPause;
+            @Pause.canceled -= instance.OnPause;
+        }
+
+        public void RemoveCallbacks(IInterfaceActions instance)
+        {
+            if (m_Wrapper.m_InterfaceActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IInterfaceActions instance)
+        {
+            foreach (var item in m_Wrapper.m_InterfaceActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_InterfaceActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public InterfaceActions @Interface => new InterfaceActions(this);
     public interface IMovementActions
     {
         void OnDirection(InputAction.CallbackContext context);
@@ -378,5 +455,9 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
     public interface ICameraLookActions
     {
         void OnLook(InputAction.CallbackContext context);
+    }
+    public interface IInterfaceActions
+    {
+        void OnPause(InputAction.CallbackContext context);
     }
 }

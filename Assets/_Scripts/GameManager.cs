@@ -19,16 +19,14 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance { get; private set; }
 
-    private GameState _gameState;
+    private GameState _gameState = GameState.Guide;
     private InventoryManager playerInvManager;
 
     private IDataService dataService = new JsonDataService();
 
     private bool isHighScoreSavingAllowed = true;
 
-    [SerializeField] List<string> nonHighScoreScenes = new();
-
-    public GameState gameState { get => _gameState; }
+    public GameState gameState { get => _gameState; set => _gameState = value; }
 
     private void Awake()
     {
@@ -38,7 +36,6 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        DisableCursor();
         OnSceneLoad(SceneManager.GetActiveScene(), LoadSceneMode.Single);
     }
 
@@ -62,14 +59,14 @@ public class GameManager : MonoBehaviour
 
     public void SetGameState(GameState gameState)
     {
-        this._gameState = gameState;
+        _gameState = gameState;
     }
 
     private void OnSceneLoad(Scene scene, LoadSceneMode loadMode)
     {
         playerInvManager = FindFirstObjectByType<InventoryManager>();
 
-        isHighScoreSavingAllowed = playerInvManager == null ? false : true;
+        isHighScoreSavingAllowed = playerInvManager == null && _gameState != GameState.Challenge ? false : true;
     }
 
     public bool SavePlayersHighScores()
@@ -80,7 +77,7 @@ public class GameManager : MonoBehaviour
             return false;
         }
 
-        if (!nonHighScoreScenes.Contains(SceneManager.GetActiveScene().name))
+        if (gameState == GameState.Challenge)
         {
             playerInvManager.AddCurrentHighScoreDataToInv();
         }
