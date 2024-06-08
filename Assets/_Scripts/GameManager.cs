@@ -3,6 +3,7 @@ using popuphints;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.Loading;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -19,29 +20,37 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance { get; private set; }
 
+    public GameState gameState { get => _gameState; set => _gameState = value; }
+    public Action onPlayerDeath;
+
     private GameState _gameState = GameState.Guide;
     private InventoryManager playerInvManager;
-
     private IDataService dataService = new JsonDataService();
-
     private bool isHighScoreSavingAllowed = true;
 
-    public GameState gameState { get => _gameState; set => _gameState = value; }
 
     private void Awake()
     {
         CheckSingleton();
-        SceneManager.sceneLoaded += OnSceneLoad;
+        SceneManager.sceneLoaded += OnSceneLoadSetup;
+        SceneManager.sceneLoaded += LoadInventoryOnSceneLoad;
     }
 
     private void Start()
     {
-        OnSceneLoad(SceneManager.GetActiveScene(), LoadSceneMode.Single);
+        OnSceneLoadSetup(SceneManager.GetActiveScene(), LoadSceneMode.Single);
     }
 
     private void OnEnable()
     {
         Application.targetFrameRate = 60;
+    }
+
+    public void LoadInventoryOnSceneLoad(Scene scene, LoadSceneMode loadMode)
+    {
+        InventoryStorage loadedStorage = LoadPlayerInventory();
+        playerInvManager.InvStorage.totalCoinCount = loadedStorage.totalCoinCount;
+        playerInvManager.InvStorage.highScores = loadedStorage.highScores;
     }
 
     private void CheckSingleton()
@@ -62,30 +71,26 @@ public class GameManager : MonoBehaviour
         _gameState = gameState;
     }
 
-    private void OnSceneLoad(Scene scene, LoadSceneMode loadMode)
+    private void OnSceneLoadSetup(Scene scene, LoadSceneMode loadMode)
     {
         playerInvManager = FindFirstObjectByType<InventoryManager>();
 
-        isHighScoreSavingAllowed = playerInvManager == null && _gameState != GameState.Challenge ? false : true;
+        isHighScoreSavingAllowed = playerInvManager != null && _gameState == GameState.Challenge ? true : false;
     }
 
-    public bool SavePlayersHighScores()
+    public bool SavePlayerInventory()
     {
-        if(!isHighScoreSavingAllowed)
+        if (!isHighScoreSavingAllowed)
         {
             Debug.Log("Saving is not allowed in this scene: " + SceneManager.GetActiveScene().name);
             return false;
         }
 
-        if (gameState == GameState.Challenge)
-        {
-            playerInvManager.AddCurrentHighScoreDataToInv();
-        }
-
         if (dataService.SaveData("/player_data.json", playerInvManager.InvStorage, false))
         {
-            InventoryStorage invHighScoreDataAfterLoad = LoadHighScoreData();
-            playerInvManager.SwapHighScores(invHighScoreDataAfterLoad);
+            InventoryStorage invPlayerAfterLoad = LoadPlayerInventory();
+            playerInvManager.SwapHighScores(invPlayerAfterLoad);
+            playerInvManager.SwapTotalCoins(invPlayerAfterLoad);
             return true;
         }
         else
@@ -95,7 +100,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private InventoryStorage LoadHighScoreData()
+    private InventoryStorage LoadPlayerInventory()
     {
         try
         {
@@ -127,14 +132,27 @@ public class GameManager : MonoBehaviour
 
     public void DisplayHint(GameObject hintPrefab)
     {
-        Time.timeScale = 0.0f;
-        EnableCursor();
-        PopUpHintManager.instance.InstantiatePopUpHint(hintPrefab);
+        if (gameState == GameState.Guide)
+        {
+            Time.timeScale = 0.0f;
+            EnableCursor();
+            PopUpHintManager.instance.InstantiatePopUpHint(hintPrefab);
+        }
     }
 
     public void OnHintDestroy()
     {
         DisableCursor();
         Time.timeScale = 1.0f;
+    }
+
+    public void PlayerHitObstacle()
+    {
+        if (onPlayerDeath != null)
+        {
+            onPlayerDeath();
+        }
+
+        SavePlayerInventory();
     }
 }

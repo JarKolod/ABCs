@@ -1058,7 +1058,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 186560793477130008, guid: b3e2277a2ae43e04f810998299138f41, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: Movement_Guide
+      value: Guide_Movement_Left_Right
       objectReference: {fileID: 0}
     - target: {fileID: 186560793477130008, guid: b3e2277a2ae43e04f810998299138f41, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -1731,12 +1731,32 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 186560793477130008, guid: b3e2277a2ae43e04f810998299138f41, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 186560793477130008, guid: b3e2277a2ae43e04f810998299138f41, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 186560793477130008, guid: b3e2277a2ae43e04f810998299138f41, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1681812871}
+      objectReference: {fileID: 432111238}
+    - target: {fileID: 186560793477130008, guid: b3e2277a2ae43e04f810998299138f41, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: LoadScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 186560793477130008, guid: b3e2277a2ae43e04f810998299138f41, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: LevelManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 186560793477130008, guid: b3e2277a2ae43e04f810998299138f41, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: Challenge_Movement_Left_Right
+      objectReference: {fileID: 0}
+    - target: {fileID: 186560793477130008, guid: b3e2277a2ae43e04f810998299138f41, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 2501930675578297772, guid: b3e2277a2ae43e04f810998299138f41, type: 3}
       propertyPath: m_Name
       value: ChallangedMenu

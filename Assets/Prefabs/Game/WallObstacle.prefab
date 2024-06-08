@@ -148,6 +148,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dustParticles: {fileID: 4451836397761804085, guid: f34660e43819af84faa4e86d89c93691, type: 3}
+  dustSpawnPointOffset: {x: 0, y: -1, z: -0.5}
 --- !u!114 &-5267280442867495895
 MonoBehaviour:
   m_ObjectHideFlags: 0

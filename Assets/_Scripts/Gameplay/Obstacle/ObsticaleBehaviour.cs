@@ -5,6 +5,7 @@ using UnityEngine;
 public class ObsticaleBehaviour : MonoBehaviour
 {
     [SerializeField] GameObject dustParticles;
+    [SerializeField] Vector3 dustSpawnPointOffset;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -30,8 +31,8 @@ public class ObsticaleBehaviour : MonoBehaviour
             case GameState.Challenge:
             {
                 PlayParticlesEffect();
+                GameManager.instance.PlayerHitObstacle();
                 Destroy(gameObject);
-                // end the run i guess
                 break;
             }
         }
@@ -40,8 +41,9 @@ public class ObsticaleBehaviour : MonoBehaviour
     private void PlayParticlesEffect()
     {
         Vector3 spawnPoint = transform.position;
-        spawnPoint.y = 0;
-        spawnPoint.z -= 1.5f;
+        spawnPoint.x += dustSpawnPointOffset.x;
+        spawnPoint.y += dustSpawnPointOffset.y;
+        spawnPoint.z += dustSpawnPointOffset.z;
 
         GameObject effect = Instantiate(dustParticles, spawnPoint, transform.rotation);
         ParticleSystem ps = effect.GetComponent<ParticleSystem>();

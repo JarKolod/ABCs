@@ -24,7 +24,7 @@ public class MovementGuideManager : MonoBehaviour
 
     private void DisplayHintOnStart()
     {
-        if (onLevelStartHint)
+        if (onLevelStartHint != null)
         {
             GameManager.instance.DisplayHint(onLevelStartHint);
         }

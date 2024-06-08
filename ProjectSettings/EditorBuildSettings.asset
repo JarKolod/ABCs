@@ -5,16 +5,13 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/Level_Template.unity
-    guid: b61083f8b5b1449418ee263f2de24fd2
   - enabled: 1
     path: Assets/Scenes/Main_Menu.unity
     guid: 7e780f77ebc1c2c40875e56888b21560
-  - enabled: 0
-    path: Assets/Scenes/Movement_Guide_Template.unity
-    guid: 9913c5b98e2cf3a46a6fa26fcef7188c
   - enabled: 1
-    path: Assets/Scenes/Movement_Guide.unity
+    path: Assets/Scenes/Guide_Movement_Left_Right.unity
+    guid: 62b498bf871e9ea43b39d26b38d8e8fd
+  - enabled: 1
+    path: Assets/Scenes/Challenge_Movement_Left_Right.unity
     guid: 5658c9892d9f2cf48afe21aecf2b3113
   m_configObjects: {}

@@ -11,7 +11,7 @@ public class PopUpHintSpawnerOnCollision : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!tagsHit.Contains(transform.tag) && CommonUtils.IsLayerInLayerMask(other.gameObject.layer, popUpOnCollisionLayer) && hintPrefab != null)
+        if (!tagsHit.Contains(transform.tag) && CommonUtils.IsLayerInLayerMask(other.gameObject.layer, popUpOnCollisionLayer) && hintPrefab != null && GameManager.instance.gameState == GameState.Guide)
         {
             tagsHit.Add(transform.tag);
             GameManager.instance.DisplayHint(hintPrefab);

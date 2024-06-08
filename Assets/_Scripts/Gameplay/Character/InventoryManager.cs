@@ -11,20 +11,22 @@ public class InventoryManager : MonoBehaviour
     public Action<int> coinCountChange;
     public Action<int> onScoreAmountChange;
 
-    public readonly List<string> noHighScoreLevels = new(){ "Main_Menu", "Level_Template" };
+    public readonly List<string> noHighScoreLevels = new() { "Main_Menu", "Level_Template" };
 
-    public int currentCoinAmount { get => invStorage.coinCount; }
+    public int currentCoinAmount { get => invStorage.currCoinCount; }
     public int currentScoreAmount { get => invStorage.scoreAmount; }
     public InventoryStorage InvStorage { get => invStorage; }
 
     private void Awake()
     {
         invStorage = new InventoryStorage();
+        GameManager.instance.onPlayerDeath += AddCurrentCoinsToTotal;
+        GameManager.instance.onPlayerDeath += AddHighScoreFromCurrentLevelToInv;
     }
 
     public void AddCoins(int amount)
     {
-        invStorage.coinCount += amount;
+        invStorage.currCoinCount += amount;
         coinCountChange?.Invoke(amount);
     }
 
@@ -34,8 +36,14 @@ public class InventoryManager : MonoBehaviour
         onScoreAmountChange?.Invoke(amount);
     }
 
-    public void AddCurrentHighScoreDataToInv()
+    public void AddHighScoreFromCurrentLevelToInv()
     {
+        if (GameManager.instance.gameState != GameState.Challenge)
+        {
+            Debug.Log("This is not a challenge level, Score does not count");
+            return;
+        }
+
         DateTime currentDate = DateTime.Now.Date;
         string sceneName = SceneManager.GetActiveScene().name;
 
@@ -51,6 +59,18 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
+    public void AddCurrentCoinsToTotal()
+    {
+
+        if (GameManager.instance.gameState != GameState.Challenge)
+        {
+            Debug.Log("This is not a challenge level, Score does not count");
+            return;
+        }
+
+        invStorage.totalCoinCount += invStorage.currCoinCount;
+    }
+
     public void SwapHighScores(InventoryStorage inv)
     {
         if (inv == null)
@@ -60,6 +80,17 @@ public class InventoryManager : MonoBehaviour
         }
 
         invStorage.highScores = new Dictionary<string, Dictionary<DateTime, int>>(inv.highScores);
+    }
+
+    public void SwapTotalCoins(InventoryStorage inv)
+    {
+        if (inv == null)
+        {
+            Debug.LogError("Attempted to update with a null InventoryStorage instance.");
+            return;
+        }
+
+        invStorage.totalCoinCount = inv.totalCoinCount;
     }
 
     public static Dictionary<string, Dictionary<DateTime, int>> MergeHighScores(
