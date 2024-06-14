@@ -1,0 +1,11 @@
+.line-chart-container {
+    border-color: rgb(0, 0, 0);
+    border-width: 1px;
+    align-self: center;
+    align-items: center;
+    min-width: 100%;
+    max-width: 100px;
+    max-height: 85%;
+    min-height: 85px;
+    flex-direction: row;
+}

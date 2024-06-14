@@ -23,4 +23,17 @@ public class InventoryStorage
     public int totalCoinCount { get => _totalCoinCount; set => _totalCoinCount = value; }
 
     public InventoryStorage() { }
+    public InventoryStorage(InventoryStorage inv) 
+    {
+        this.highScores = new Dictionary<string, Dictionary<DateTime, int>>();
+        foreach (var outerPair in inv.highScores)
+        {
+            var innerDict = new Dictionary<DateTime, int>(outerPair.Value);
+            this.highScores.Add(outerPair.Key, innerDict);
+        }
+
+        this.totalCoinCount = inv.totalCoinCount;
+        this.scoreAmount = inv.scoreAmount;
+        this.currCoinCount = inv.currCoinCount;
+    }
 }

@@ -42,7 +42,7 @@ public class InterfaceManager : MonoBehaviour
     public void RestartLevel()
     {
         ResumeGame();
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        LevelManager.instance.RestartCurrentScene();
     }
 
     public void LoadMainMenu()
@@ -82,5 +82,10 @@ public class InterfaceManager : MonoBehaviour
         GameManager.instance.EnableCursor();
 
         GameOverScreenCanvas.gameObject.SetActive(true);
+    }
+
+    public void ExitGame()
+    {
+        GameManager.instance.ExitGame();
     }
 }

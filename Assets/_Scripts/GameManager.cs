@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
     private GameState _gameState = GameState.Guide;
     private InventoryManager playerInvManager;
     private IDataService dataService = new JsonDataService();
-    private bool isHighScoreSavingAllowed = true;
+    private bool isPlayerStatsSavingAllowed = true;
 
 
     private void Awake()
@@ -74,13 +74,18 @@ public class GameManager : MonoBehaviour
     private void OnSceneLoadSetup(Scene scene, LoadSceneMode loadMode)
     {
         playerInvManager = FindFirstObjectByType<InventoryManager>();
+        if(playerInvManager == null)
+        {
+            Debug.Log("Player inventory not found in scene");
+            throw new Exception("Player inventory not found in scene");
+        }
 
-        isHighScoreSavingAllowed = playerInvManager != null && _gameState == GameState.Challenge ? true : false;
+        isPlayerStatsSavingAllowed = playerInvManager != null && _gameState == GameState.Challenge ? true : false;
     }
 
     public bool SavePlayerInventory()
     {
-        if (!isHighScoreSavingAllowed)
+        if (!isPlayerStatsSavingAllowed)
         {
             Debug.Log("Saving is not allowed in this scene: " + SceneManager.GetActiveScene().name);
             return false;
@@ -154,5 +159,10 @@ public class GameManager : MonoBehaviour
         }
 
         SavePlayerInventory();
+    }
+
+    public void ExitGame()
+    {
+        Application.Quit();
     }
 }

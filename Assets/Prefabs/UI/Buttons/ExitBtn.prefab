@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: <
+  m_text: x
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c8e914593fa05b44c867745300c8d8b6, type: 2}
   m_sharedMaterial: {fileID: -8352446467598670350, guid: c8e914593fa05b44c867745300c8d8b6, type: 2}
@@ -100,7 +100,7 @@ MonoBehaviour:
   m_fontSizeMax: 72
   m_fontStyle: 1
   m_HorizontalAlignment: 2
-  m_VerticalAlignment: 512
+  m_VerticalAlignment: 4096
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -147,7 +147,7 @@ GameObject:
   - component: {fileID: 4451886541103544368}
   - component: {fileID: 7255028294399243893}
   m_Layer: 5
-  m_Name: BackBtn
+  m_Name: ExitBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
