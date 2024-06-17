@@ -147,8 +147,8 @@ public class GameManager : MonoBehaviour
 
     public void OnHintDestroy()
     {
-        DisableCursor();
         Time.timeScale = 1.0f;
+        DisableCursor();
     }
 
     public void PlayerHitObstacle()

@@ -47,6 +47,7 @@ public class InterfaceManager : MonoBehaviour
 
     public void LoadMainMenu()
     {
+        Time.timeScale = 1;
         LevelManager.instance.LoadScene(LevelManager.MainMenu);
     }
 

@@ -24,7 +24,6 @@ public class CloseCallsBehaviour : MonoBehaviour
         {
             if (hitLeft.transform.tag.Equals("Obstacle"))
             {
-                Debug.Log("Hit Left: " + hitLeft.collider.name + ", distance: " + hitLeft.distance);
                 closeCallAnimator.SetTrigger("CloseCall");
                 StartCoroutine(CloseCallCoolDown());
             }

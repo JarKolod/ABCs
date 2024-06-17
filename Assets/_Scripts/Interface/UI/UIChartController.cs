@@ -4,33 +4,35 @@ using UnityEngine;
 using System;
 using System.Linq;
 using UnityEngine.SceneManagement;
+using System.ComponentModel;
 
 [RequireComponent(typeof(RectTransform))]
-public class UIHightScoreChartController : MonoBehaviour
+public class UIChartController : MonoBehaviour
 {
     [SerializeField] Level levelSelected = Level.ChallengeMovementLeftRight;
     [Space]
     [SerializeField] private InventoryManager playerInvManager;
     [SerializeField] private RectTransform chartContainer;
     [SerializeField] private UILineRenderer uiLineRenderer;
-
+    [Space]
+    [SerializeField] private TMPro.TextMeshProUGUI chartTitle;
     [SerializeField] private TMPro.TextMeshProUGUI firstXLabel;
     [SerializeField] private TMPro.TextMeshProUGUI lastXLabel;
     [SerializeField] private TMPro.TextMeshProUGUI firstYLabel;
     [SerializeField] private TMPro.TextMeshProUGUI lastYLabel;
-
+    [Space]
     [SerializeField] private float bottomChartMargin = 20f;
     [SerializeField] private float topChartMargin = 20f;
     [SerializeField] private float leftChartMargin = 20f;
     [SerializeField] private float rightChartMargin = 20f;
 
     private InventoryStorage invStorage;
-
     private Dictionary<string, Dictionary<DateTime, int>> highScores;
+
 
     private void Start()
     {
-        invStorage = new InventoryStorage(playerInvManager.InvStorage);
+        ChartMenuSetup();
 
         // TODO: remove this line after testing
         StartCoroutine(FillChart());
@@ -42,6 +44,11 @@ public class UIHightScoreChartController : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         FillChartWithHighScores(levelSelected);
         UpdateChart();
+    }
+
+    private void ChartMenuSetup()
+    {
+        invStorage = new InventoryStorage(playerInvManager.InvStorage);
     }
 
     public void SetPoints(Vector2[] points)
@@ -89,6 +96,7 @@ public class UIHightScoreChartController : MonoBehaviour
         List<DateTime> dates = new List<DateTime>(highScoresForScene.Keys);
         dates.Sort();
 
+        chartTitle.text = LevelManager.instance.GetSceneName(level);
         FillLabels(highScoresForScene);
 
         Vector2[] points = CalculateChartPoints(dates, highScoresForScene);
@@ -101,6 +109,7 @@ public class UIHightScoreChartController : MonoBehaviour
     {
         firstYLabel.text = scoresWithDates.Values.Min().ToString();
         lastYLabel.text = scoresWithDates.Values.Max().ToString();
+
         firstXLabel.text = scoresWithDates.Keys.Min().ToString(format: "dd/MM/yyyy");
         lastXLabel.text = scoresWithDates.Keys.Max().ToString(format: "dd/MM/yyyy");
     }

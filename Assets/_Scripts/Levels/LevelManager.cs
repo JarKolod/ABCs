@@ -9,6 +9,7 @@ using UnityEngine.UI;
 
 public enum Level
 {
+    None,
     MainMenu,
     GuideMovementLeftRight,
     ChallengeMovementLeftRight
@@ -18,10 +19,15 @@ public class LevelManager : MonoBehaviour
 {
     public static LevelManager instance;
 
+
+    private static Level _selectedLevel = Level.None;
+    public static Level selectedLevel { get => _selectedLevel; set => _selectedLevel = value; }
+
+    // scene name should be changed here and in assets only
+    public static string None { get => ""; }
     public static string MainMenu { get => "Main_Menu"; }
     public static string GuideMovementLeftRight { get => "Guide_Movement_Left_Right"; }
     public static string ChallengeMovementLeftRight { get => "Challenge_Movement_Left_Right"; }
-
 
     private void Awake()
     {
@@ -40,6 +46,8 @@ public class LevelManager : MonoBehaviour
     {
         switch (level)
         {
+            case Level.None:
+                return "";
             case Level.MainMenu:
                 return MainMenu;
             case Level.GuideMovementLeftRight:
@@ -49,6 +57,15 @@ public class LevelManager : MonoBehaviour
             default:
                 return "";
         }
+    }
+
+    public void LoadSelectedLevel()
+    {
+        if (selectedLevel == Level.None)
+        {
+            return;
+        }
+        LoadLevel(selectedLevel);
     }
 
     public void LoadScene(string sceneName)

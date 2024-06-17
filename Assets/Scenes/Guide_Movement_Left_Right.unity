@@ -934,7 +934,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1681812872}
-  - component: {fileID: 1681812875}
+  - component: {fileID: 1681812873}
   m_Layer: 0
   m_Name: LevelManager
   m_TagString: Untagged
@@ -957,7 +957,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1681812875
+--- !u!114 &1681812873
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -966,7 +966,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1681812871}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fda5e65d58c63f24da26dc31331e4afa, type: 3}
+  m_Script: {fileID: 11500000, guid: 3d46828dc765cef4ab31820e67b85edd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &1688940106 stripped
