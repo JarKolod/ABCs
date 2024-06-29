@@ -13,8 +13,7 @@ GameObject:
   - component: {fileID: 6008859958126826101}
   - component: {fileID: 2059059729834242417}
   - component: {fileID: 4475578715726495172}
-  - component: {fileID: 7722522354158739931}
-  - component: {fileID: -5267280442867495895}
+  - component: {fileID: 7736709468306097312}
   m_Layer: 11
   m_Name: WallObstacle
   m_TagString: Obstacle
@@ -135,7 +134,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
---- !u!114 &7722522354158739931
+--- !u!114 &7736709468306097312
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -148,20 +147,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dustParticles: {fileID: 4451836397761804085, guid: f34660e43819af84faa4e86d89c93691, type: 3}
-  dustSpawnPointOffset: {x: 0, y: -1, z: -0.5}
---- !u!114 &-5267280442867495895
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7171808283834306668}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ecf4cf69de69127478728f92f6b75014, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hintPrefab: {fileID: 846864818939647986, guid: b4975a6de7c322d4bbd3f2edb70026df, type: 3}
-  popUpOnCollisionLayer:
-    serializedVersion: 2
-    m_Bits: 1024
+  dustSpawnPointOffset: {x: 0, y: 0, z: -1}

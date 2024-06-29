@@ -9,6 +9,7 @@ TagManager:
   - Coin
   - TrackSectionEnd
   - TrackSectionStart
+  - ShootingTarget
   layers:
   - Default
   - TransparentFX
@@ -27,7 +28,7 @@ TagManager:
   - TrackSectionStart
   - TrackSectionEnd
   - SpawnPoint
-  - 
+  - ShootingTarget
   - 
   - 
   - 

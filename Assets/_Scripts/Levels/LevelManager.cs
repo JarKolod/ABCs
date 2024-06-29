@@ -12,7 +12,9 @@ public enum Level
     None,
     MainMenu,
     GuideMovementLeftRight,
-    ChallengeMovementLeftRight
+    ChallengeMovementLeftRight,
+    GuideMovementAim,
+    ChallengeMovementAim
 }
 
 public class LevelManager : MonoBehaviour
@@ -23,11 +25,13 @@ public class LevelManager : MonoBehaviour
     private static Level _selectedLevel = Level.None;
     public static Level selectedLevel { get => _selectedLevel; set => _selectedLevel = value; }
 
-    // scene name should be changed here and in assets only
+    // scene names should correspond to the names in the build settings and the scene asset names and be defined only here
     public static string None { get => ""; }
     public static string MainMenu { get => "Main_Menu"; }
     public static string GuideMovementLeftRight { get => "Guide_Movement_Left_Right"; }
     public static string ChallengeMovementLeftRight { get => "Challenge_Movement_Left_Right"; }
+    public static string ChallengeMovementAim { get => "Challenge_Movement_Aim"; }
+    public static string GuideMovementAim { get => "Guide_Movement_Aim"; }
 
     private void Awake()
     {
@@ -52,8 +56,12 @@ public class LevelManager : MonoBehaviour
                 return MainMenu;
             case Level.GuideMovementLeftRight:
                 return GuideMovementLeftRight;
+            case Level.GuideMovementAim:
+                return GuideMovementAim;
             case Level.ChallengeMovementLeftRight:
                 return ChallengeMovementLeftRight;
+            case Level.ChallengeMovementAim:
+                return ChallengeMovementAim;
             default:
                 return "";
         }

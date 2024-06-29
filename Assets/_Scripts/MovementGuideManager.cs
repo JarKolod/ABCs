@@ -7,8 +7,6 @@ public class MovementGuideManager : MonoBehaviour
 {
     public static MovementGuideManager instance { get; private set; }
 
-    [SerializeField] GameObject onLevelStartHint;
-
     private void Awake()
     {
         CheckSingleton();
@@ -18,20 +16,6 @@ public class MovementGuideManager : MonoBehaviour
     {
         GameManager.instance.SetGameState(GameState.Guide);
         GameManager.instance.DisableCursor();
-        Invoke("DisplayHintOnStart", 0.5f);
-    }
-
-
-    private void DisplayHintOnStart()
-    {
-        if (onLevelStartHint != null)
-        {
-            GameManager.instance.DisplayHint(onLevelStartHint);
-        }
-        else
-        {
-            Debug.Log("No Hint on Start up");
-        }
     }
 
     private void CheckSingleton()

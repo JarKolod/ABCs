@@ -1,13 +1,22 @@
+using popuphints;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObsticaleBehaviour : MonoBehaviour
+public class ObsticaleBehaviour : MonoBehaviour, IDestructible
 {
     [SerializeField] GameObject dustParticles;
     [SerializeField] Vector3 dustSpawnPointOffset;
 
+    private static bool hasHintOnCollisionDisplayed = false;
+
     private void OnTriggerEnter(Collider other)
+    {
+        ObstacleHitBehaviour(other);
+    }
+
+    private void ObstacleHitBehaviour(Collider other)
     {
         if (!other.transform.tag.Equals("Player"))
         {
@@ -23,9 +32,8 @@ public class ObsticaleBehaviour : MonoBehaviour
             }
             case GameState.Guide:
             {
-                PlayParticlesEffect();
-                Destroy(gameObject);
-
+                DisplayCollisionHint();
+                OnDestroyObj();
                 break;
             }
             case GameState.Challenge:
@@ -35,6 +43,15 @@ public class ObsticaleBehaviour : MonoBehaviour
                 Destroy(gameObject);
                 break;
             }
+        }
+    }
+
+    private void DisplayCollisionHint()
+    {
+        if(!hasHintOnCollisionDisplayed && PopUpHintManager.instance.onCollisionHint != null)
+        {
+            GameManager.instance.DisplayHint(PopUpHintManager.instance.onCollisionHint);
+            hasHintOnCollisionDisplayed = true;
         }
     }
 
@@ -55,7 +72,14 @@ public class ObsticaleBehaviour : MonoBehaviour
         }
         else
         {
+            print("not Playing particles");
             Destroy(effect.gameObject);
         }
+    }
+
+    public void OnDestroyObj()
+    {
+        PlayParticlesEffect();
+        Destroy(gameObject);
     }
 }

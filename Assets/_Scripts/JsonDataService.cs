@@ -43,7 +43,7 @@ public class JsonDataService : IDataService
 
         if (!File.Exists(path))
         {
-            Debug.LogError($"Cannot load file at {path}. File does not exist, returning null!");
+            Debug.LogWarning($"Cannot load file at {path}. File does not exist, returning null!");
             data = null;
             return false;
         }

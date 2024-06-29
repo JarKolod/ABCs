@@ -8,14 +8,4 @@ public class MovementLeftRightManager : MonoBehaviour
     {
         GameManager.instance.gameState = GameState.Challenge;
     }
-
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-        
-    }
 }

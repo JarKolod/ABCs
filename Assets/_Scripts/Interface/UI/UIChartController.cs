@@ -33,15 +33,17 @@ public class UIChartController : MonoBehaviour
     private void Start()
     {
         ChartMenuSetup();
-
-        // TODO: remove this line after testing
-        StartCoroutine(FillChart());
     }
 
-    // TODO: remove this method after testing
-    IEnumerator FillChart()
+    public void FillChart()
     {
-        yield return new WaitForSeconds(0.5f);
+        FillChartWithHighScores(levelSelected);
+        UpdateChart();
+    }
+
+    public void FillChart(Level level)
+    {
+        SetLevel(level);
         FillChartWithHighScores(levelSelected);
         UpdateChart();
     }
@@ -85,7 +87,8 @@ public class UIChartController : MonoBehaviour
             return;
         }
 
-        Dictionary<DateTime, int> highScoresForScene = invStorage.highScores[LevelManager.instance.GetSceneName(level)];
+        Dictionary<DateTime, int> highScoresForScene;
+        invStorage.highScores.TryGetValue(LevelManager.instance.GetSceneName(level), out highScoresForScene);
 
         if (highScoresForScene == null || highScoresForScene.Count == 0)
         {

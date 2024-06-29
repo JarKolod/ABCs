@@ -8,13 +8,19 @@ namespace popuphints
     {
         public static PopUpHintManager instance { get; private set; }
 
-        [SerializeField] GameObject onLevelStartHint;
+        public GameObject onLevelStartHint;
+        public GameObject onCollisionHint;
 
         GameObject hintBeingDisplayed;
 
         private void OnEnable()
         {
             CheckSingleton();
+        }
+
+        private void Start()
+        {
+            Invoke("DisplayHintOnStart", 0.5f);
         }
 
         private void CheckSingleton()
@@ -27,6 +33,18 @@ namespace popuphints
             else
             {
                 Destroy(gameObject);
+            }
+        }
+
+        private void DisplayHintOnStart()
+        {
+            if (onLevelStartHint != null)
+            {
+                GameManager.instance.DisplayHint(onLevelStartHint);
+            }
+            else
+            {
+                Debug.Log("No Hint on Start up");
             }
         }
 

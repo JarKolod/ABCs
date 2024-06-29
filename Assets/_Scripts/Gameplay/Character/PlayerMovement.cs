@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -6,6 +7,12 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
     CharacterController playerCharController;
+
+    public bool AllowMoveLeft { get => allowMoveLeft; set => allowMoveLeft = value; }
+    public bool AllowMoveRight { get => allowMoveRight; set => allowMoveRight = value; }
+    public bool AllowMoveForward { get => allowMoveForward; set => allowMoveForward = value; }
+    public bool AllowMoveBack { get => allowMoveBack; set => allowMoveBack = value; }
+    public bool AllowOnlySpecifiedAxisMovement { get => allowOnlySpecifiedAxisMovement; set => allowOnlySpecifiedAxisMovement = value; }
 
     [Header("Dependencies")]
     [SerializeField] private InputManager inputManager;
@@ -19,18 +26,22 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float characterGravityScalar = 1.7f;
     [Space]
     [Header("Move Disabling")]
+    [SerializeField] bool allowOnlySpecifiedAxisMovement = false;
+    [SerializeField] bool reverseHorizontalAxis = false;
+    [SerializeField] bool reverseVerticalAxis = false;
+    [Space]
     [SerializeField] bool allowMoveLeft = true;
     [SerializeField] bool allowMoveRight = true;
     [SerializeField] bool allowMoveForward = true;
     [SerializeField] bool allowMoveBack = true;
+    [Space]
     [SerializeField] bool allowJump = true;
     [Space]
+    [Header("Move Player")]
+    [SerializeField] Vector2 playerInputDirections;
 
     Vector3 playerDirectionalMove;
     Vector3 directionalSmoothVelocity = Vector3.zero;
-
-    [Header("Move Player")]
-    [SerializeField] Vector3 playerInputDirections;
     float currentYFrameVelocity;
     float prevYFrameVelocity;
     private int currentJumpCharges;
@@ -67,7 +78,19 @@ public class PlayerMovement : MonoBehaviour
 
         ApplyDirectionalMovementRestrictions();
 
-        Vector3 desiredDirectionalMove = transform.forward * playerInputDirections.y + transform.right * playerInputDirections.x;
+        Vector3 desiredDirectionalMove = new Vector3();
+        if(allowOnlySpecifiedAxisMovement)
+        {
+            // - because player character is facing opposite direction
+            desiredDirectionalMove = 
+                (reverseVerticalAxis ? -1 : 1) * Vector3.forward * playerInputDirections.y + 
+                (reverseHorizontalAxis ? -1 : 1) * Vector3.right * playerInputDirections.x;
+        }
+        else
+        {
+            desiredDirectionalMove = transform.forward * playerInputDirections.y + transform.right * playerInputDirections.x;
+        }
+
         playerDirectionalMove = Vector3.SmoothDamp(playerDirectionalMove, desiredDirectionalMove, ref directionalSmoothVelocity, directionalMoveSmoothTime);
 
         playerCharController.Move(Time.deltaTime * (playerDirectionalMove * speed + currentYFrameVelocity * Vector3.up));
@@ -85,10 +108,23 @@ public class PlayerMovement : MonoBehaviour
 
     private void ApplyDirectionalMovementRestrictions()
     {
-        if (!allowMoveForward && playerInputDirections.y > 0) playerInputDirections.y = 0;
-        if (!allowMoveBack && playerInputDirections.y < 0) playerInputDirections.y = 0;
-        if (!allowMoveLeft && playerInputDirections.x < 0) playerInputDirections.x = 0;
-        if (!allowMoveRight && playerInputDirections.x > 0) playerInputDirections.x = 0;
+        if (!allowMoveForward && playerInputDirections.y > 0)
+        {
+            playerInputDirections.y = 0;
+        }
+        if (!allowMoveBack && playerInputDirections.y < 0)
+        {
+            playerInputDirections.y = 0;
+        }
+        if (!allowMoveLeft && playerInputDirections.x < 0)
+        {
+            playerInputDirections.x = 0;
+        }
+        if (!allowMoveRight && playerInputDirections.x > 0)
+        {
+            playerInputDirections.x = 0;
+        }
+
     }
 
     private void OnJumpBtn(InputAction.CallbackContext ctx)

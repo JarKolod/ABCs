@@ -11,8 +11,12 @@ public class InterfaceManager : MonoBehaviour
     [SerializeField] private InputManager inputManager;
     [SerializeField] private Canvas pauseMenuCanvas;
     [SerializeField] private Canvas GameOverScreenCanvas;
+    [Space]
     [Header("Visual Helpers")]
     [SerializeField] private GameObject playerCollisionVisualHelper;
+    [Space]
+    [SerializeField] private PlayerMovement playerMovement;
+
 
 
     private void Start()
@@ -27,6 +31,18 @@ public class InterfaceManager : MonoBehaviour
         {
             playerCollisionVisualHelper.SetActive(!playerCollisionVisualHelper.activeSelf);
         }
+    }
+    
+    public void TogglePlayerVerticalMovement()
+    {
+        playerMovement.AllowMoveBack = !playerMovement.AllowMoveBack;
+        playerMovement.AllowMoveForward = !playerMovement.AllowMoveForward;
+    }
+
+    public void TogglePlayerHorizontalMovement()
+    {
+        playerMovement.AllowMoveLeft = !playerMovement.AllowMoveLeft;
+        playerMovement.AllowMoveRight = !playerMovement.AllowMoveRight;
     }
 
     public void ResumeGame()

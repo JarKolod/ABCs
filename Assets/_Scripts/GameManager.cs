@@ -21,6 +21,8 @@ public class GameManager : MonoBehaviour
     public static GameManager instance { get; private set; }
 
     public GameState gameState { get => _gameState; set => _gameState = value; }
+    public InventoryManager PlayerInvManager { get => playerInvManager; set => playerInvManager = value; }
+
     public Action onPlayerDeath;
 
     private GameState _gameState = GameState.Guide;
