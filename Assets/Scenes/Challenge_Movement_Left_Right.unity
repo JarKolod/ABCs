@@ -453,8 +453,8 @@ MonoBehaviour:
   trackSections:
   - {fileID: 5186641353482581412, guid: 2399c949daa6b854c8e8fea315e6826c, type: 3}
   - {fileID: 5186641353482581412, guid: e5c220250cb4f4447870d3221049cf7e, type: 3}
-  _trackSpeed: 5
-  trackAccelerationScalar: 0.5
+  _trackSpeed: 6
+  trackAccelerationScalar: 1.1
   _maxTrackSpeed: 15
   distanceBetweenTrackElementSpawns: 30
   trackAccelerationIntervalsSec: 20
@@ -780,6 +780,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onLevelStartHint: {fileID: 0}
+  onCollisionHint: {fileID: 0}
 --- !u!4 &1259671140
 Transform:
   m_ObjectHideFlags: 0

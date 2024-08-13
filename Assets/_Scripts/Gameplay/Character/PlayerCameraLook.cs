@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,7 +13,7 @@ public class PlayerCameraLook : MonoBehaviour
     [SerializeField] float rotationSmoothTime = 0.025f;
     [SerializeField] bool blockHorizontalLook = false;
     [SerializeField] bool blockVerticalLook = false;
-    [Range(-180, 180f)][SerializeField] float verticalLockAngle = 0f;
+    [Range(-180f, 180f)][SerializeField] float verticalLockAngle = 0f;
     [Range(-180f, 180f)][SerializeField] float horizontalLockAngle = 0f;
     [Space]
 
@@ -22,9 +23,11 @@ public class PlayerCameraLook : MonoBehaviour
     private float xRotationVelocity = 0f;
     private float yRotationVelocity = 0f;
 
+    public float MouseSense { get => mouseSense; set => mouseSense = value; }
+
     private void Update()
     {
-        mouseDelta = inputManager.inputMaster.CameraLook.Look.ReadValue<Vector2>() * mouseSense * Time.deltaTime;
+        mouseDelta = inputManager.inputMaster.CameraLook.Look.ReadValue<Vector2>() * MouseSense * Time.deltaTime;
     }
 
     private void LateUpdate()
@@ -77,5 +80,10 @@ public class PlayerCameraLook : MonoBehaviour
             xRotationVelocity = 0f;
             yRotationVelocity = 0f;
         }
+    }
+
+    public void SetMouseSens(float value)
+    {
+        MouseSense = value;
     }
 }

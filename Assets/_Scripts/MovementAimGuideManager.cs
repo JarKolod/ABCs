@@ -7,5 +7,6 @@ public class MovementAimGuideManager : MonoBehaviour
     void Start()
     {
         GameManager.instance.SetGameState(GameState.Guide);
+        GameManager.instance.DisableCursor();
     }
 }

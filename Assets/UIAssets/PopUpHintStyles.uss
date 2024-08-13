@@ -54,3 +54,11 @@
 
 .paragraf_text {
 }
+
+.header2 {
+    font-size: 30px;
+    color: rgb(255, 255, 255);
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 5px;
+}

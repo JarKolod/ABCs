@@ -197,7 +197,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecf4cf69de69127478728f92f6b75014, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hintPrefab: {fileID: 846864818939647986, guid: 8e020e5a453d978458ef5e8c89058984, type: 3}
+  hintPrefab: {fileID: 846864818939647986, guid: d365aee7e965552469787a315e17adb8, type: 3}
   popUpOnCollisionLayer:
     serializedVersion: 2
     m_Bits: 1024
